@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bekyiu.mapper.QuestionMapper">
+
+    <resultMap id="BaseResultMap" type="bekyiu.domain.Question">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="user_id" property="userId"/>
+        <result column="create_date" property="createDate"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="content" property="content"/>
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey">
+        delete from `question`
+        where id = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into `question` (title, user_id, create_date, comment_count, content)
+        values (#{title}, #{userId}, #{createDate}, #{commentCount}, #{content})
+    </insert>
+    <update id="updateByPrimaryKey">
+        update `question`
+        set title = #{title},
+          user_id = #{userId},
+          create_date = #{createDate},
+          comment_count = #{commentCount},
+          content = #{content}
+        where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select id, title, user_id, create_date, comment_count, content
+        from `question`
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, title, user_id, create_date, comment_count, content
+        from `question`
+    </select>
+</mapper>
