@@ -15,11 +15,11 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         insert into `user` (username, password, salt, head_url)
-        values (#{username}, #{password}, #{salt}, #{head_url})
+        values (#{username}, #{password}, #{salt}, #{headUrl})
     </insert>
     <update id="updateByPrimaryKey">
         update `user`
-        set username = #{username}, password = #{password}, salt = #{salt}, head_url = #{head_url}
+        set username = #{username}, password = #{password}, salt = #{salt}, head_url = #{headUrl}
         where id = #{id}
     </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
