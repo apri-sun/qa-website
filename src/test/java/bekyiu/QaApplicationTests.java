@@ -2,6 +2,7 @@ package bekyiu;
 
 import bekyiu.domain.User;
 import bekyiu.mapper.UserMapper;
+import bekyiu.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class QaApplicationTests
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private IUserService service;
 
     @Test
     public void save()
@@ -28,7 +31,7 @@ public class QaApplicationTests
             user.setPassword("p" + i);
             user.setSalt("s" + i);
             user.setHeadUrl("url");
-            userMapper.insert(user);
+            service.save(user);
         }
     }
 

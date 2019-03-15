@@ -5,40 +5,44 @@ import bekyiu.mapper.UserMapper;
 import bekyiu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements IUserService
 {
     @Autowired
     private UserMapper userMapper;
 
     @Override
-    public Integer save(User user)
+    public void save(User user)
     {
-        return userMapper.insert(user);
+        userMapper.insert(user);
     }
 
     @Override
-    public Integer update(User user)
+    public void update(User user)
     {
-        return userMapper.updateByPrimaryKey(user);
+        userMapper.updateByPrimaryKey(user);
     }
 
     @Override
-    public Integer delete(Long id)
+    public void delete(Long id)
     {
-        return userMapper.deleteByPrimaryKey(id);
+        userMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User get(Long id)
     {
         return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> listAll()
     {
         return userMapper.selectAll();

@@ -5,10 +5,12 @@ import bekyiu.mapper.QuestionMapper;
 import bekyiu.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class QuestionServiceImpl implements IQuestionService
 {
     @Autowired
@@ -26,12 +28,14 @@ public class QuestionServiceImpl implements IQuestionService
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Question get(Long id)
     {
         return questionMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Question> listAll()
     {
         return questionMapper.selectAll();
