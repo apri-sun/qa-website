@@ -15,4 +15,6 @@ public interface IQuestionService
     List<Question> listAll();
 
     void update(Question question);
+
+    List<Question> getLatestQuestions(Integer userId, Integer offset, Integer limit);
 }

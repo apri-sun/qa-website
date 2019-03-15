@@ -37,4 +37,14 @@
         select id, title, user_id, create_date, comment_count, content
         from `question`
     </select>
+    <select id="getLatestQuestions" resultMap="BaseResultMap">
+        SELECT * FROM question
+        <where>
+            <if test="userId != 0">
+                AND user_id = #{userId}
+            </if>
+        </where>
+        ORDER BY create_date DESC
+        LIMIT #{offset}, #{limit}
+    </select>
 </mapper>

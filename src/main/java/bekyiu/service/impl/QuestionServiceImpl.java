@@ -46,4 +46,11 @@ public class QuestionServiceImpl implements IQuestionService
     {
         questionMapper.updateByPrimaryKey(question);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Question> getLatestQuestions(Integer userId, Integer offset, Integer limit)
+    {
+        return questionMapper.getLatestQuestions(userId, offset, limit);
+    }
 }
