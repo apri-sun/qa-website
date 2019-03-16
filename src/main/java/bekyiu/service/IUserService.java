@@ -20,4 +20,6 @@ public interface IUserService
     User selectByUsername(String username);
 
     Map<String, String> register(String username, String password);
+
+    Map<String, String> login(String username, String password);
 }

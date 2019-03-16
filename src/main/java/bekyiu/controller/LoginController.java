@@ -29,12 +29,19 @@ public class LoginController
     @RequestMapping("/loginToHtml")
     public String loginToHtml()
     {
+
         return "login";
     }
 
     @RequestMapping("/login")
-    public String login(String username, String password)
+    public String login(Model model, String username, String password)
     {
+        Map<String, String> map = userService.login(username, password);
+        if(map.size() != 0)
+        {
+            model.addAttribute("msg", map.get("msg"));
+            return "login";
+        }
         return "redirect:/";
     }
 }

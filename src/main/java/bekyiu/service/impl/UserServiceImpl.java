@@ -70,6 +70,30 @@ public class UserServiceImpl implements IUserService
     }
 
     @Override
+    public Map<String, String> login(String username, String password)
+    {
+        Map<String, String> map = new HashMap<>();
+        //null, "", "    " 都会返回true
+        if(StringUtils.isBlank(username))
+        {
+            map.put("msg", "用户名不能为空");
+            return map;
+        }
+        if(StringUtils.isBlank(password))
+        {
+            map.put("msg", "密码不能为空");
+            return map;
+        }
+        User user = userMapper.selectByUsername(username);
+        if(user == null || !user.getPassword().equals(MD5.encode(password + user.getSalt())))
+        {
+            map.put("msg", "用户名或密码错误");
+            return map;
+        }
+        return map;
+    }
+
+    @Override
     public void delete(Long id)
     {
         userMapper.deleteByPrimaryKey(id);

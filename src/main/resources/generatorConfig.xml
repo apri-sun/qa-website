@@ -41,7 +41,7 @@
 
 
         <!-- ============================================================================== -->
-        <table tableName="question" delimitIdentifiers="true">
+        <table tableName="login_ticket" delimitIdentifiers="true">
             <!--false使用驼峰表示-->
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="JDBC"/>
