@@ -31,4 +31,9 @@
         select id, username, password, salt, head_url
         from `user`
     </select>
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select id, username, password, salt, head_url
+        from `user`
+        where username = #{username}
+    </select>
 </mapper>

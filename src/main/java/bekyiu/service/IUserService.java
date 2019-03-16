@@ -3,6 +3,7 @@ package bekyiu.service;
 import bekyiu.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService
 {
@@ -15,4 +16,8 @@ public interface IUserService
     List<User> listAll();
 
     void update(User user);
+
+    User selectByUsername(String username);
+
+    Map<String, String> register(String username, String password);
 }

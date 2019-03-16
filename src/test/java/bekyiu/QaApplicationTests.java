@@ -51,7 +51,7 @@ public class QaApplicationTests
     @Test
     public void get()
     {
-        User user = userMapper.selectByPrimaryKey(1L);
+        User user = userMapper.selectByUsername("user614");
         System.out.println("user = " + user);
     }
 
