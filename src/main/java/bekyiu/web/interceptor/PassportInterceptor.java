@@ -26,6 +26,7 @@ public class PassportInterceptor implements HandlerInterceptor
     private HostHolder hostHolder;
 
     @Override
+    //一律都返回true, 因为即便不登录, 也可以浏览信息
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object o) throws Exception
     {
         LoginTicket loginTicket = null;
@@ -44,7 +45,7 @@ public class PassportInterceptor implements HandlerInterceptor
 
             if (loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0)
             {
-                //??
+                //以免在页面获取报空指针
                 hostHolder.setUser(new User());
                 return true;
             }
