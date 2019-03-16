@@ -1,4 +1,4 @@
-package bekyiu.controller;
+package bekyiu.web.controller;
 
 import bekyiu.domain.Question;
 import bekyiu.domain.ViewObject;

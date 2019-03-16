@@ -100,6 +100,13 @@ public class UserServiceImpl implements IUserService
         map.put("ticket", loginTicket.getTicket());
         return map;
     }
+
+    @Override
+    public void logout(String ticket)
+    {
+        ticketService.updateStatusByTicket(ticket, 1);
+    }
+
     //准备要下发的ticket
     private LoginTicket sentTicket(Long userId)
     {
@@ -107,7 +114,7 @@ public class UserServiceImpl implements IUserService
         loginTicket.setUserId(userId);
         loginTicket.setTicket(UUID.randomUUID().toString().replaceAll("-", ""));
         Date now = new Date();
-        now.setTime(now.getTime() + 3600 * 24 * 30); //30天后过期
+        now.setTime(now.getTime() + 1000L * 3600 * 24 * 30); //30天后过期
         loginTicket.setExpired(now);
         loginTicket.setStatus(0);
         ticketService.save(loginTicket);

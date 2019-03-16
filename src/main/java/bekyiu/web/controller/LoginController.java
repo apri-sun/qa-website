@@ -1,9 +1,10 @@
-package bekyiu.controller;
+package bekyiu.web.controller;
 
 import bekyiu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,6 +41,13 @@ public class LoginController
         Map<String, String> map = userService.login(username, password);
         //包含说明登陆成功
         return sent(map, model, resp);
+    }
+
+    @RequestMapping("/logout")
+    public String logout(@CookieValue("ticket") String ticket)
+    {
+        userService.logout(ticket);
+        return "redirect:/";
     }
 
     private String sent(@NotNull Map<String, String> map, Model model, HttpServletResponse resp)
