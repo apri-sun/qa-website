@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Controller
@@ -15,15 +19,11 @@ public class LoginController
     private IUserService userService;
 
     @RequestMapping("/reg")
-    public String register(Model model, String username, String password)
+    public String register(Model model, HttpServletResponse resp, String username, String password)
     {
         Map<String, String> map = userService.register(username, password);
-        if(map.size() != 0)
-        {
-            model.addAttribute("msg", map.get("msg"));
-            return "login";
-        }
-        return "redirect:/";
+        //注册后自动登陆, 也要下发ticket
+        return sent(map, model, resp);
     }
 
     @RequestMapping("/loginToHtml")
@@ -34,14 +34,28 @@ public class LoginController
     }
 
     @RequestMapping("/login")
-    public String login(Model model, String username, String password)
+    public String login(Model model, HttpServletResponse resp, String username, String password,
+    @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe)
     {
         Map<String, String> map = userService.login(username, password);
-        if(map.size() != 0)
+        //包含说明登陆成功
+        return sent(map, model, resp);
+    }
+
+    private String sent(@NotNull Map<String, String> map, Model model, HttpServletResponse resp)
+    {
+        if(map.containsKey("ticket"))
+        {
+            //下发ticket
+            Cookie cookie = new Cookie("ticket", map.get("ticket"));
+            cookie.setPath("/");
+            resp.addCookie(cookie);
+            return "redirect:/";
+        }
+        else
         {
             model.addAttribute("msg", map.get("msg"));
             return "login";
         }
-        return "redirect:/";
     }
 }
