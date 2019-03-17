@@ -31,7 +31,7 @@ public class QuestionController
         question.setCommentCount(0);
         if (hostHolder.getUser().getId() == null)
         {
-            question.setUserId(1L);
+            return JsonUtil.getJsonString(1, "请先登陆");
         }
         else
         {
