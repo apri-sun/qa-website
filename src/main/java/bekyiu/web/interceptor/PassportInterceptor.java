@@ -31,7 +31,12 @@ public class PassportInterceptor implements HandlerInterceptor
     {
         LoginTicket loginTicket = null;
         Cookie[] cookies = req.getCookies();
-        if (cookies != null)
+        if(cookies == null)
+        {
+            //以免在页面获取报空指针
+            hostHolder.setUser(new User());
+        }
+        else
         {
             for (Cookie cookie : cookies)
             {
