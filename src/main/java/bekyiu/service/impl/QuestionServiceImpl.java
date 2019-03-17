@@ -6,6 +6,7 @@ import bekyiu.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class QuestionServiceImpl implements IQuestionService
     @Override
     public void save(Question question)
     {
+        //内容中可能有html标签
+        question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
+        question.setContent(HtmlUtils.htmlEscape(question.getContent()));
         questionMapper.insert(question);
     }
 
