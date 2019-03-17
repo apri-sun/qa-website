@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class LoginController
 
     @RequestMapping("/login")
     public String login(Model model, HttpServletResponse resp, String username, String password,
-    @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe)
+                        @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe)
     {
         Map<String, String> map = userService.login(username, password);
         //包含说明登陆成功
@@ -44,19 +45,31 @@ public class LoginController
     }
 
     @RequestMapping("/logout")
-    public String logout(@CookieValue("ticket") String ticket)
+    public String logout(HttpServletRequest req)
     {
-        userService.logout(ticket);
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null)
+        {
+            for (Cookie cookie : cookies)
+            {
+                if ("ticket".equals(cookie.getName()))
+                {
+                    userService.logout(cookie.getValue());
+                    break;
+                }
+            }
+        }
         return "redirect:/";
     }
 
     private String sent(@NotNull Map<String, String> map, Model model, HttpServletResponse resp)
     {
-        if(map.containsKey("ticket"))
+        if (map.containsKey("ticket"))
         {
             //下发ticket
             Cookie cookie = new Cookie("ticket", map.get("ticket"));
             cookie.setPath("/");
+            cookie.setMaxAge(3600 * 24 * 30);
             resp.addCookie(cookie);
             return "redirect:/";
         }
