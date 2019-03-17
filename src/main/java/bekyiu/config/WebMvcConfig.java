@@ -1,5 +1,6 @@
 package bekyiu.config;
 
+import bekyiu.web.interceptor.LoginRequiredInterceptor;
 import bekyiu.web.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebMvcConfig extends WebMvcConfigurerAdapter
 {
     @Autowired
-    PassportInterceptor passportInterceptor;
+    private PassportInterceptor passportInterceptor;
+    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
@@ -22,6 +25,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     @Override
     public void addInterceptors(InterceptorRegistry registry)
     {
+        //拦截器的注册顺序就是调用的顺序
         registry.addInterceptor(passportInterceptor).addPathPatterns("/**").excludePathPatterns("/loginToHtml", "/reg", "/login");
+        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/user/*");
     }
 }

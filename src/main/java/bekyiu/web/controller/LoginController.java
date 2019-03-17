@@ -1,10 +1,10 @@
 package bekyiu.web.controller;
 
 import bekyiu.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,27 +21,29 @@ public class LoginController
     private IUserService userService;
 
     @RequestMapping("/reg")
-    public String register(Model model, HttpServletResponse resp, String username, String password)
+    public String register(Model model, HttpServletResponse resp, String username, String password,
+                           @RequestParam(required = false) String next)
     {
         Map<String, String> map = userService.register(username, password);
         //注册后自动登陆, 也要下发ticket
-        return sent(map, model, resp);
+        return sent(map, model, resp, next);
     }
 
     @RequestMapping("/loginToHtml")
-    public String loginToHtml()
+    public String loginToHtml(Model model, @RequestParam(required = false) String next)
     {
-
+        model.addAttribute("next", next);
         return "login";
     }
 
     @RequestMapping("/login")
     public String login(Model model, HttpServletResponse resp, String username, String password,
-                        @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe)
+                        @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe,
+                        @RequestParam(required = false) String next)
     {
         Map<String, String> map = userService.login(username, password);
         //包含说明登陆成功
-        return sent(map, model, resp);
+        return sent(map, model, resp, next);
     }
 
     @RequestMapping("/logout")
@@ -62,7 +64,7 @@ public class LoginController
         return "redirect:/";
     }
 
-    private String sent(@NotNull Map<String, String> map, Model model, HttpServletResponse resp)
+    private String sent(@NotNull Map<String, String> map, Model model, HttpServletResponse resp, String next)
     {
         if (map.containsKey("ticket"))
         {
@@ -71,6 +73,10 @@ public class LoginController
             cookie.setPath("/");
             cookie.setMaxAge(3600 * 24 * 30);
             resp.addCookie(cookie);
+            if(StringUtils.isNotBlank(next))
+            {
+                return "redirect:" + next;
+            }
             return "redirect:/";
         }
         else

@@ -36,6 +36,7 @@
             <div class="desk-front sign-flow clearfix sign-flow-simple">
                 <div class="view view-signin" data-za-module="SignInForm" style="display: block;">
                     <form novalidate="novalidate" id="loginForm" action="" method="post">
+                        <input type="hidden" name="next" th:value="${next}"/>
                         <input type="hidden" name="_xsrf" value="21aa1c8d254df2899b23ab9afbd62a53">
                         <div class="group-inputs">
                             <div class="email input-wrapper">
