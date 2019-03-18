@@ -54,10 +54,56 @@ public class SensitiveWordsServiceImpl implements ISensitiveWordsService, Initia
         }
 
     }
-    public void a()
+
+    private static final String REPLACEMENT = "***";
+
+    public String filter(String text)
     {
+        if (text == null)
+        {
+            return "";
+        }
+        int begin = 0;
+        int cur = 0; //用cur指向的字符去字典树中查
+        Trie.Node node = trie.getRoot();
+        StringBuilder result = new StringBuilder();
+        while (begin < text.trim().length())
+        {
+            Character ch = text.charAt(cur);
+            if (node.getNext().containsKey(ch))
+            {
+                cur++;
+                node = node.getNext().get(ch);
+                if(node.isWord())
+                {
+                    result.append(REPLACEMENT);
+                    begin = cur;
+                    node = trie.getRoot();
+                    continue;
+                }
+            }
+            else
+            {
+                //如果当前字符从字典树中查不出来要要分两种情况
+                //1:前面已经匹配上了一部分, 只是当前字符没匹配上
+                if(node != trie.getRoot()) //此时node一定是往下移动过得
+                {
+                    result.append(text, begin, cur + 1);
+                    cur++;
+                    begin = cur;
+                    node = trie.getRoot();
+                }
+                else //2: 一直都没有匹配上
+                {
+                    //result.append(text.substring(begin, cur + 1));
+                    result.append(text, begin, cur + 1);
+                    begin++;
+                    cur = begin;
+                }
 
+            }
+        }
+        return result.toString();
     }
-
 
 }

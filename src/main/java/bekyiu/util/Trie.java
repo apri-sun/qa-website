@@ -1,12 +1,16 @@
 package bekyiu.util;
 
+import lombok.Getter;
+
 import java.util.TreeMap;
 
 public class Trie
 {
-    private class Node
+    public class Node
     {
+        @Getter
         public TreeMap<Character, Node> next;
+        @Getter
         public boolean isWord;
 
         public Node(boolean isWord)

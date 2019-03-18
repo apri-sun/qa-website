@@ -2,5 +2,5 @@ package bekyiu.service;
 
 public interface ISensitiveWordsService
 {
-//    void buildTrie();
+    String filter(String text);
 }
