@@ -2,14 +2,20 @@ package bekyiu.web.controller;
 
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.Question;
+import bekyiu.domain.ViewObject;
 import bekyiu.service.IQuestionService;
+import bekyiu.service.IUserService;
 import bekyiu.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class QuestionController
@@ -19,6 +25,8 @@ public class QuestionController
 
     @Autowired
     private IQuestionService questionService;
+    @Autowired
+    private IUserService userService;
 
     @RequestMapping("/question/add")
     @ResponseBody
@@ -40,4 +48,14 @@ public class QuestionController
         questionService.save(question);
         return JsonUtil.getJsonString(0);
     }
+
+    @RequestMapping("/question/{questionId}")
+    public String questionDetail(@PathVariable Long questionId, Model model)
+    {
+        Question question = questionService.get(questionId);
+        model.addAttribute("question", question);
+        model.addAttribute("askUser", userService.get(question.getUserId()));
+        return "detail";
+    }
+
 }
