@@ -17,4 +17,6 @@ public interface IQuestionService
     void update(Question question);
 
     List<Question> getLatestQuestions(Integer userId, Integer offset, Integer limit);
+
+    Integer updateCommentCount(Long id, Integer commentCount);
 }

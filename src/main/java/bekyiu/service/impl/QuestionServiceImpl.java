@@ -68,4 +68,10 @@ public class QuestionServiceImpl implements IQuestionService
     {
         return questionMapper.getLatestQuestions(userId, offset, limit);
     }
+
+    @Override
+    public Integer updateCommentCount(Long id, Integer commentCount)
+    {
+        return questionMapper.updateCommentCount(id, commentCount);
+    }
 }

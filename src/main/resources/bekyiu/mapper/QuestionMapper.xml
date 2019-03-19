@@ -47,4 +47,9 @@
         ORDER BY create_date DESC
         LIMIT #{offset}, #{limit}
     </select>
+    <update id="updateCommentCount">
+        update `question`
+        set comment_count = #{commentCount}
+        where id = #{id}
+    </update>
 </mapper>

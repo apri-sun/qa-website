@@ -4,6 +4,7 @@ import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.User;
 import bekyiu.service.ICommentService;
+import bekyiu.service.IQuestionService;
 import bekyiu.util.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ public class CommentController
     private ICommentService commentService;
     @Autowired
     private HostHolder hostHolder;
+    @Autowired
+    private IQuestionService questionService;
 
     @RequestMapping("/addComment")
     //给问题添加评论
@@ -37,6 +40,8 @@ public class CommentController
             comment.setUserId(hostHolder.getUser().getId());
         }
         commentService.save(comment);
+        Integer count = commentService.getCommentCount(EntityType.ENTITY_QUESTION, questionId);
+        questionService.updateCommentCount(questionId, count);
         return "redirect:/question/" + questionId;
     }
 }

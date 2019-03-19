@@ -28,4 +28,6 @@ public interface QuestionMapper
     List<Question> getLatestQuestions(@Param("userId") Integer userId,
                                       @Param("offset") Integer offset,
                                       @Param("limit") Integer limit);
+
+    Integer updateCommentCount(@Param("id") Long id, @Param("commentCount") Integer commentCount);
 }
