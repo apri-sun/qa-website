@@ -1,9 +1,13 @@
 package bekyiu.web.controller;
 
+import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.Question;
+import bekyiu.domain.ViewObject;
+import bekyiu.service.ICommentService;
 import bekyiu.service.IQuestionService;
 import bekyiu.service.IUserService;
+import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class QuestionController
@@ -24,6 +30,8 @@ public class QuestionController
     private IQuestionService questionService;
     @Autowired
     private IUserService userService;
+    @Autowired
+    private ICommentService commentService;
 
     @RequestMapping("/question/add")
     @ResponseBody
@@ -52,6 +60,16 @@ public class QuestionController
         Question question = questionService.get(questionId);
         model.addAttribute("question", question);
         model.addAttribute("askUser", userService.get(question.getUserId()));
+        List<Comment> comments = commentService.selectCommentByEntity(EntityType.ENTITY_QUESTION, questionId);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Comment comment : comments)
+        {
+            ViewObject vo = new ViewObject();
+            vo.put("comment", comment);
+            vo.put("user", userService.get(comment.getUserId()));
+            vos.add(vo);
+        }
+        model.addAttribute("vos", vos);
         return "detail";
     }
 

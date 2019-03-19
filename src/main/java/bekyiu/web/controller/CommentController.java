@@ -4,7 +4,6 @@ import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.User;
 import bekyiu.service.ICommentService;
-import bekyiu.service.IUserService;
 import bekyiu.util.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class CommentController
         comment.setCreatedDate(new Date());
         comment.setEntityId(questionId);
         comment.setEntityType(EntityType.ENTITY_QUESTION);
-        if(hostHolder.getUser().getId() == null)
+        if (hostHolder.getUser().getId() == null)
         {
             comment.setUserId(User.ANONYMOUS_USER_ID);
         }

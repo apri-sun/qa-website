@@ -127,7 +127,9 @@
             </div>
             <div id="zh-question-answer-wrap" data-pagesize="10" class="zh-question-answer-wrapper navigable"
                  data-widget="navigable" data-navigable-options="{&quot;items&quot;: &quot;&gt;.zm-item-answer&quot;}"
-                 data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}">
+                 data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0},
+                    &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}" th:each="vo : ${vos}">
+
                 <div tabindex="-1" class="zm-item-answer  zm-item-expanded" itemprop="topAnswer" itemscope=""
                      itemtype="http://schema.org/Answer" data-aid="22162611" data-atoken="66862039" data-collapsed="0"
                      data-created="1444310527" data-deleted="0" data-helpful="1" data-isowner="0" data-copyable="1"
@@ -151,8 +153,9 @@
                                data-tip="p$t$yingxiaodao">
                                 <img src="../static/images/res/11be4a90ed938abfbab4899df56ee754_s.png"
                                      class="zm-list-avatar avatar"></a>
-                            <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="">营销岛</a>
-                            <span title="爱科学 爱运动" class="bio">，爱科学 爱运动</span></div>
+                            <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href=""
+                               th:href="@{/user/{userId}(userId = ${vo.get('user').id})}" th:utext="${vo.get('user').username}">营销岛</a>
+                        </div>
                         <div class="zm-item-vote-info" data-votecount="28" data-za-module="VoteInfo">
                                 <span class="voters text">
                                     <a href="" class="more text">
@@ -165,23 +168,27 @@
                         <div class="zh-summary summary clearfix" style="display:none;">
                             谢邀！网络水军的兴衰起伏，与互联网的进化相互交织。他们是社交时代的镜子，折射的不仅是屏幕上的瞬息万变，还有公众意识与舆论的更替变迁。从论坛时代到微博时代，再到微信时代，水军一直处于舆论的风口浪尖，但他们自称舆论的“弄潮儿”。从人声鼎沸到繁…
                             <a href="" class="toggle-expand">显示全部</a></div>
-                        <div class="zm-editable-content clearfix" th:utext="">
-                            <p>谢邀！</p>
-                            <p>
-                                网络水军的兴衰起伏，与互联网的进化相互交织。他们是社交时代的镜子，折射的不仅是屏幕上的瞬息万变，还有公众意识与舆论的更替变迁。从论坛时代到微博时代，再到微信时代，水军一直处于舆论的风口浪尖，但他们自称舆论的“弄潮儿”。从人声鼎沸到繁华落尽，如今，水军进入蛰伏期，静待属于他们的春天再次来临。</p>
-                            <p>论坛时代：.....</p>
+                        <div class="zm-editable-content clearfix">
+                            <pre th:text="${vo.get('comment').content}">
+
+                            </pre>
+                            <!--<p>谢邀！</p>-->
+                            <!--<p>-->
+                                <!--网络水军的兴衰起伏，与互联网的进化相互交织。他们是社交时代的镜子，折射的不仅是屏幕上的瞬息万变，还有公众意识与舆论的更替变迁。从论坛时代到微博时代，再到微信时代，水军一直处于舆论的风口浪尖，但他们自称舆论的“弄潮儿”。从人声鼎沸到繁华落尽，如今，水军进入蛰伏期，静待属于他们的春天再次来临。</p>-->
+                            <!--<p>论坛时代：.....</p>-->
 
                         </div>
                     </div>
                     <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
                     <div class="zm-item-meta answer-actions clearfix js-contentActions">
                         <div class="zm-meta-panel">
-                            <a itemprop="url" class="answer-date-link meta-item" target="_blank" href="">发布于
-                                2015-10-08</a>
+                            <a itemprop="url" class="answer-date-link meta-item" target="_blank" href=""
+                               th:utext="'发布于 ' + ${#dates.format(vo.get('comment').createdDate, 'yyyy-MM-dd HH:mm:ss')}">
+                                发布于 2015-10-08
+                            </a>
                             <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
-                                <i class="z-icon-comment"></i>4 条评论</a>
-                            <a href="" class="meta-item zu-autohide js-thank" data-thanked="false">
-                                <i class="z-icon-thank"></i>感谢</a>
+                                <i class="z-icon-comment"></i>4 条评论
+                            </a>
 
                             <button class="item-collapse js-collapse" style="transition: none;">
                                 <i class="z-icon-fold"></i>收起
@@ -434,15 +441,18 @@
         }
 
 
+
 </script>
 <script type="text/json" class="json-inline" data-name="current_user">
     ["\u80e1\u539f", "hu-yuan-24-48", "https:\/\/pic1.zhimg.com\/0c6a39621ab1d456b1e6e492d0becc0c_s.jpg", "69e344deb3bd4d35db07194565261bbe", "", 0, 0, true, "422018883@qq.com", "http:\/\/mail.qq.com", 0, true, false, false, "734705672150609920", false]
+
 
 
 </script>
 <script type="text/json" class="json-inline" data-name="user_status">[null, null]</script>
 <script type="text/json" class="json-inline" data-name="env">
     ["nowcoder.com", "comet.nowcoder.com", false, null, false]
+
 
 
 </script>
@@ -456,6 +466,7 @@
         }
 
 
+
 </script>
 <script type="text/json" class="json-inline" data-name="ra-urls">{
             "Report": "https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/Report.d6e20840.js",
@@ -464,6 +475,7 @@
             "common": "https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/common.ed1d17c3.js",
             "CommentApp": "https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/CommentApp.2ab02258.js"
         }
+
 
 
 </script>
@@ -482,6 +494,7 @@
         }
 
 
+
 </script>
 <script type="text/json" class="json-inline" data-name="current_question_owner">false</script>
 <script type="text/json" class="json-inline" data-name="draft">[]</script>
@@ -491,6 +504,7 @@
             "type": "HEADLINE",
             "value": null
         }
+
 
 
 </script>
