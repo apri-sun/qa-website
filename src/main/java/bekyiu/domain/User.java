@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class User
 {
+    public static final Long ANONYMOUS_USER_ID = 1L;
+
     private Long id;
 
     private String username;
