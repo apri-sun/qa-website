@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bekyiu.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="bekyiu.domain.Comment">
+        <id column="id"  property="id"/>
+        <result column="entity_id"  property="entityId"/>
+        <result column="entity_type"  property="entityType"/>
+        <result column="created_date"  property="createdDate"/>
+        <result column="user_id"  property="userId"/>
+        <result column="content"  property="content"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `comment`
+        where id = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="bekyiu.domain.Comment" useGeneratedKeys="true">
+        insert into `comment` (entity_id, entity_type, created_date, user_id, content)
+        values (#{entityId}, #{entityType}, #{createdDate}, #{userId}, #{content})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="bekyiu.domain.Comment">
+        update `comment`
+        set entity_id = #{entityId},
+          entity_type = #{entityType},
+          created_date = #{createdDate},
+          user_id = #{userId},
+          content = #{content}
+        where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, entity_id, entity_type, created_date, user_id, content
+        from `comment`
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, entity_id, entity_type, created_date, user_id, content
+        from `comment`
+    </select>
+    <select id="selectCommentByEntity" resultMap="BaseResultMap">
+        SELECT * FROM comment WHERE entity_id = #{entityId} AND entity_type = #{entityType}
+    </select>
+
+    <select id="getCommentCount" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE entity_id = #{entityId} AND entity_type = #{entityType}
+    </select>
+</mapper>
