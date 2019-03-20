@@ -9,7 +9,16 @@
           content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="keywords" content="读《Web 全栈工程师的自我修养》">
     <meta name="description" content="阅读影浅分享的读《Web 全栈工程师的自我修养》，就在牛客网。">
-
+    <script type="text/javascript" src="../static/scripts/jquery-3.3.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../static/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/font-awesome.min.css">
 
@@ -28,7 +37,7 @@
 <div id="main">
     <div class="zg-wrap zu-main clearfix ">
         <ul class="letter-chatlist">
-            <li id="msg-item-4009580">
+            <li id="msg-item-4009580" th:each="vo : ${vos}">
                 <a class="list-head">
                     <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
                 </a>
@@ -36,204 +45,11 @@
                     <div class="tooltip-arrow"></div>
                     <div class="tooltip-inner letter-chat clearfix">
                         <div class="letter-info">
-                            <p class="letter-time">今天 15:28</p>
+                            <p class="letter-time" th:utext="${#dates.format(vo.get('message').createdDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
                             <a href="javascript:void(0);" id="del-link" name="4009580">删除</a>
                         </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=141625">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3993979">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-23 20:52</p>
-                            <a href="javascript:void(0);" id="del-link" name="3993979">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=141384">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3969636">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-22 20:12</p>
-                            <a href="javascript:void(0);" id="del-link" name="3969636">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=141023">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3951814">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-22 10:23</p>
-                            <a href="javascript:void(0);" id="del-link" name="3951814">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/655a43d702cd466093022383c24a38bf?toCommentId=140827">"回文串"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3891213">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-17 21:25</p>
-                            <a href="javascript:void(0);" id="del-link" name="3891213">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=139813">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3887263">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-17 17:09</p>
-                            <a href="javascript:void(0);" id="del-link" name="3887263">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=139749">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3873768">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-16 21:53</p>
-                            <a href="javascript:void(0);" id="del-link" name="3873768">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=139559">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3855466">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-15 22:23</p>
-                            <a href="javascript:void(0);" id="del-link" name="3855466">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/655a43d702cd466093022383c24a38bf?toCommentId=139271">"回文串"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3844040">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-15 11:30</p>
-                            <a href="javascript:void(0);" id="del-link" name="3844040">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=139031">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li id="msg-item-3838847">
-                <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
-                </a>
-                <div class="tooltip fade right in">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner letter-chat clearfix">
-                        <div class="letter-info">
-                            <p class="letter-time">06-14 21:58</p>
-                            <a href="javascript:void(0);" id="del-link" name="3838847">删除</a>
-                        </div>
-                        <p class="chat-content">
-                            你收藏的问题<a class="msg-view-all"
-                                     href="/questionTerminal/abc3fe2ce8e146608e868a70efebf62e?toCommentId=138905">"二维数组中的查找"</a>
-                            有了新的回答，去看看对自己是否有用吧。（不想再收到此类提醒？<a class="msg-view-all"
-                                                             href="/profile/account#setNotification">点击设置</a>
-                            ）
+                        <p class="chat-content" th:utext="${vo.get('user').username} + ': ' + ${vo.get('message').content}">
+
                         </p>
                     </div>
                 </div>
@@ -334,6 +150,96 @@
     </div>
 </div>
 
+<!--模态框 提问-->
+<div class="modal fade" id="ask" tabindex="-1" role="dialog" aria-labelledby="askLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="askLabel">问题</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="title" class="control-label">标题:</label>
+                        <input type="text" class="form-control" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="control-label">说明:</label>
+                        <textarea style="width: 100%;height: 100%;" class="form-control" id="content"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="release">发布</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框 消息-->
+<div class="modal fade" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="msgLabel">消息</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="title" class="control-label">接收人:</label>
+                        <input type="text" class="form-control" id="toName">
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="control-label">内容:</label>
+                        <textarea style="width: 100%;height: 100%;" class="form-control" id="message"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="send">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
+
+<script>
+    $(function ()
+    {
+        $("#ask #release").click(function ()
+        {
+            var title = $("#title").val()
+            var content = $("#content").val()
+            $.post("/question/add",{"title":title, "content":content},function(backData){
+                if(backData.code == 0)
+                {
+                    window.location.reload()
+                }
+                else
+                {
+                    window.location.href = "/loginToHtml"
+                }
+            }, "json");
+        })
+        $("#msg #send").click(function ()
+        {
+            var toName = $("#toName").val()
+            var content = $("#message").val()
+            console.log(toName)
+            console.log(content)
+            $.post("/msg/add",{"toName":toName, "content":content},function(backData){
+                if(backData.code == 0)
+                {
+                    window.location.reload()
+                }
+                else
+                {
+                    window.location.href = "/loginToHtml"
+                }
+            }, "json");
+        })
+    })
+</script>

@@ -3,16 +3,20 @@ package bekyiu.web.controller;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.Message;
 import bekyiu.domain.User;
+import bekyiu.domain.ViewObject;
 import bekyiu.service.IMessageService;
 import bekyiu.service.IUserService;
 import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MessageController
@@ -30,8 +34,18 @@ public class MessageController
     }
 
     @RequestMapping("/msg/detail")
-    public String messageDetail(String conversationId)
+    public String messageDetail(Model model, String conversationId)
     {
+        List<Message> messages = messageService.getByConversationId(conversationId, 0, 10);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Message message : messages)
+        {
+            ViewObject vo = new ViewObject();
+            vo.put("message", message);
+            vo.put("user", userService.get(message.getFromId()));
+            vos.add(vo);
+        }
+        model.addAttribute("vos", vos);
         return "letterDetail";
     }
 
