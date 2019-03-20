@@ -12,4 +12,8 @@ public interface IMessageService
     List<Message> getByConversationId(String conversationId, Integer offset, Integer limit);
 
     List<MessageVO> getConversationList(Long userId, Integer offset, Integer limit);
+
+    Integer getUnReadCount(Long userId, String conversationId);
+
+    void updateReadStatus(Integer hasRead, Long userId, String conversationId);
 }

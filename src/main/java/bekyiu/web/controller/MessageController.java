@@ -44,6 +44,7 @@ public class MessageController
             //对方的id
             Long targetId = conversation.getFromId() == hostHolder.getUser().getId() ? conversation.getToId() :  conversation.getFromId();
             vo.put("targetUser", userService.get(targetId));
+            vo.put("unreadCount", messageService.getUnReadCount(hostHolder.getUser().getId(), conversation.getConversationId()));
             vos.add(vo);
         }
         model.addAttribute("vos", vos);
@@ -53,11 +54,17 @@ public class MessageController
     @RequestMapping("/msg/detail")
     public String messageDetail(Model model, String conversationId)
     {
+        if(hostHolder.getUser() == null || hostHolder.getUser().getId() == null)
+        {
+            return JsonUtil.getJsonString(1, "请先登录");
+        }
+        messageService.updateReadStatus(EntityType.HAS_READ, hostHolder.getUser().getId(), conversationId);
         List<Message> messages = messageService.getByConversationId(conversationId, 0, 10);
         List<ViewObject> vos = new ArrayList<>();
         for (Message message : messages)
         {
             ViewObject vo = new ViewObject();
+
             vo.put("message", message);
             vo.put("user", userService.get(message.getFromId()));
             vos.add(vo);
@@ -82,7 +89,7 @@ public class MessageController
         Message message = new Message();
         message.setContent(content);
         message.setCreatedDate(new Date());
-        message.setHasRead(EntityType.HAS_READ);
+        message.setHasRead(EntityType.NOT_READ);
         message.setFromId(hostHolder.getUser().getId());
         message.setToId(toUser.getId());
         //不用set, 因为set toid和fromid的时候相当于set了 get的时候回自动拼

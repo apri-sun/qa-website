@@ -36,4 +36,5 @@
         from `user`
         where username = #{username}
     </select>
+
 </mapper>

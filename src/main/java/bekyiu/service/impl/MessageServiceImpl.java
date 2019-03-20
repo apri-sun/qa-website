@@ -40,4 +40,16 @@ public class MessageServiceImpl implements IMessageService
     {
         return messageMapper.getConversationList(userId, offset, limit);
     }
+
+    @Override
+    public Integer getUnReadCount(Long userId, String conversationId)
+    {
+        return messageMapper.getUnReadCount(userId, conversationId);
+    }
+
+    @Override
+    public void updateReadStatus(Integer hasRead, Long userId, String conversationId)
+    {
+        messageMapper.updateReadStatus(hasRead, userId, conversationId);
+    }
 }

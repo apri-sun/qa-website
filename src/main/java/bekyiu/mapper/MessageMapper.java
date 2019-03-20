@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface MessageMapper
 {
@@ -31,4 +32,15 @@ public interface MessageMapper
     List<MessageVO> getConversationList(@Param("userId") Long userId,
                                         @Param("offset") Integer offset,
                                         @Param("limit") Integer limit);
+
+    //拿到一个对话中未读的消息条数
+    //select count(id) from message where to_id = #{userId}
+    // and has_read = 0 and conversation_id = #{conversationId}
+    Integer getUnReadCount(@Param("userId") Long userId, @Param("conversationId") String conversationId);
+
+    //改变已读状态
+    //update message set has_read = ? where conversation_id = ? and to_id = ?
+    void updateReadStatus(@Param("hasRead") Integer hasRead,
+                          @Param("userId") Long userId,
+                          @Param("conversationId") String conversationId);
 }
