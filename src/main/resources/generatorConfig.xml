@@ -41,7 +41,7 @@
 
 
         <!-- ============================================================================== -->
-        <table tableName="comment" delimitIdentifiers="true">
+        <table tableName="message" delimitIdentifiers="true">
             <!--false使用驼峰表示-->
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="JDBC"/>

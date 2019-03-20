@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bekyiu.mapper.MessageMapper">
+    
+    <resultMap id="BaseResultMap" type="bekyiu.domain.Message">
+        <id column="id"  property="id"/>
+        <result column="from_id"  property="fromId"/>
+        <result column="to_id"  property="toId"/>
+        <result column="created_date"  property="createdDate"/>
+        <result column="has_read"  property="hasRead"/>
+        <result column="conversation_id"  property="conversationId"/>
+        <result column="content"  property="content"/>
+    </resultMap>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `message`
+        where id = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="bekyiu.domain.Message" useGeneratedKeys="true">
+        insert into `message` (from_id, to_id, created_date, has_read, conversation_id, content)
+        values (#{fromId}, #{toId}, #{createdDate}, 
+          #{hasRead}, #{conversationId}, #{content})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="bekyiu.domain.Message">
+        update `message`
+        set from_id = #{fromId},
+          to_id = #{toId},
+          created_date = #{createdDate},
+          has_read = #{hasRead},
+          conversation_id = #{conversationId},
+          content = #{content}
+        where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, from_id, to_id, created_date, has_read, conversation_id, content
+        from `message`
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, from_id, to_id, created_date, has_read, conversation_id, content
+        from `message`
+    </select>
+
+    <select id="getByConversationId" resultMap="BaseResultMap">
+        SELECT * FROM message WHERE conversation_id = #{conversationId}
+        LIMIT #{offset}, #{limit}
+    </select>
+</mapper>
