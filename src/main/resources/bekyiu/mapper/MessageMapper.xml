@@ -11,6 +11,17 @@
         <result column="conversation_id"  property="conversationId"/>
         <result column="content"  property="content"/>
     </resultMap>
+
+    <resultMap id="voMap" type="bekyiu.vo.MessageVO">
+        <id column="id"  property="id"/>
+        <result column="from_id"  property="fromId"/>
+        <result column="to_id"  property="toId"/>
+        <result column="created_date"  property="createdDate"/>
+        <result column="has_read"  property="hasRead"/>
+        <result column="conversation_id"  property="conversationId"/>
+        <result column="content"  property="content"/>
+        <result column="count" property="count"/>
+    </resultMap>
     
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from `message`
@@ -44,5 +55,10 @@
     <select id="getByConversationId" resultMap="BaseResultMap">
         SELECT * FROM message WHERE conversation_id = #{conversationId}
         LIMIT #{offset}, #{limit}
+    </select>
+    <select id="getConversationList" resultMap="voMap">
+        select *, count(id) as count from
+        (select * from message where from_id = #{userId} or to_id = #{userId} order by created_date desc) reverseTable
+        group by conversation_id order by created_date desc limit #{offset}, #{limit};
     </select>
 </mapper>

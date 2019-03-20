@@ -4,6 +4,7 @@ import bekyiu.domain.Message;
 import bekyiu.mapper.MessageMapper;
 import bekyiu.service.IMessageService;
 import bekyiu.service.ISensitiveWordsService;
+import bekyiu.vo.MessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +32,12 @@ public class MessageServiceImpl implements IMessageService
     public List<Message> getByConversationId(String conversationId, Integer offset, Integer limit)
     {
         return messageMapper.getByConversationId(conversationId, offset, limit);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MessageVO> getConversationList(Long userId, Integer offset, Integer limit)
+    {
+        return messageMapper.getConversationList(userId, offset, limit);
     }
 }
