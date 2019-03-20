@@ -218,13 +218,13 @@
             <div class="tooltip-inner inner">如需转载，请通过私信或评论联系我</div></div>
     </div>
 
-    <!--模态框-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <!--模态框 提问-->
+    <div class="modal fade" id="ask" tabindex="-1" role="dialog" aria-labelledby="askLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">问题</h4>
+                    <h4 class="modal-title" id="askLabel">问题</h4>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -244,19 +244,60 @@
             </div>
         </div>
     </div>
+    <!--模态框 消息-->
+    <div class="modal fade" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="msgLabel">消息</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="title" class="control-label">接收人:</label>
+                            <input type="text" class="form-control" id="toName">
+                        </div>
+                        <div class="form-group">
+                            <label for="content" class="control-label">内容:</label>
+                            <textarea style="width: 100%;height: 100%;" class="form-control" id="message"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="send">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
 <script>
     $(function ()
     {
-        $("#exampleModal #release").click(function ()
+        $("#ask #release").click(function ()
         {
             var title = $("#title").val()
             var content = $("#content").val()
-            console.log(title)
-            console.log(content)
             $.post("/question/add",{"title":title, "content":content},function(backData){
+                if(backData.code == 0)
+                {
+                    window.location.reload()
+                }
+                else
+                {
+                    window.location.href = "/loginToHtml"
+                }
+            }, "json");
+        })
+        $("#msg #send").click(function ()
+        {
+            var toName = $("#toName").val()
+            var content = $("#message").val()
+            console.log(toName)
+            console.log(content)
+            $.post("/msg/add",{"toName":toName, "content":content},function(backData){
                 if(backData.code == 0)
                 {
                     window.location.reload()

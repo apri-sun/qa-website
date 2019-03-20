@@ -26,6 +26,7 @@ public class MessageServiceImpl implements IMessageService
         messageMapper.insert(message);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Message> getByConversationId(String conversationId, Integer offset, Integer limit)
     {
