@@ -151,7 +151,7 @@
                         <div class="zm-item-answer-author-info">
                             <a class="zm-item-link-avatar avatar-link" href="" target="_blank"
                                data-tip="p$t$yingxiaodao">
-                                <img src="../static/images/res/11be4a90ed938abfbab4899df56ee754_s.png"
+                                <img src="../static/images/res/11be4a90ed938abfbab4899df56ee754_s.png" th:src="${vo.get('user').headUrl}"
                                      class="zm-list-avatar avatar"></a>
                             <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href=""
                                th:href="@{/user/{userId}(userId = ${vo.get('user').id})}" th:utext="${vo.get('user').username}">营销岛</a>

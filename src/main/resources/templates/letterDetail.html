@@ -39,7 +39,7 @@
         <ul class="letter-chatlist">
             <li id="msg-item-4009580" th:each="vo : ${vos}">
                 <a class="list-head">
-                    <img alt="头像" src="http://static.nowcoder.com/images/head/notify.png">
+                    <img alt="头像" src="#" th:src="${vo.get('user').headUrl}" >
                 </a>
                 <div class="tooltip fade right in">
                     <div class="tooltip-arrow"></div>

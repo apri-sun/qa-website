@@ -8,7 +8,7 @@
             <a href="https://nowcoder.com/people/hu-yuan-24-48" class="zu-top-nav-userinfo " id=":0" role="button"
                aria-haspopup="true" aria-activedescendant="">
                 <span class="name" th:text="${user.username} == null ? '未登录' : ${user.username}">牛客</span>
-                <img class="Avatar" src="../static/images/res/da8e974dc_s.jpg"
+                <img class="Avatar" src="" th:src="${user.headUrl} == null ? '../static/images/res/da8e974dc_s.jpg' : ${user.headUrl}"
                      srcset="https://pic1.zhimg.com/da8e974dc_xs.jpg 2x" alt="牛客">
                 <span id="zh-top-nav-new-pm" class="zg-noti-number zu-top-nav-pm-count" style="visibility:hidden"
                       data-count="0">

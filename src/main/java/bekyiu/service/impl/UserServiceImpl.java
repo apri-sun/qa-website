@@ -45,12 +45,12 @@ public class UserServiceImpl implements IUserService
     {
         Map<String, String> map = new HashMap<>();
         //null, "", "    " 都会返回true
-        if(StringUtils.isBlank(username))
+        if (StringUtils.isBlank(username))
         {
             map.put("msg", "用户名不能为空");
             return map;
         }
-        if(StringUtils.isBlank(password))
+        if (StringUtils.isBlank(password))
         {
             map.put("msg", "密码不能为空");
             return map;
@@ -62,11 +62,11 @@ public class UserServiceImpl implements IUserService
     public Map<String, String> register(String username, String password)
     {
         Map<String, String> map = checkParams(username, password);
-        if(map.size() != 0)
+        if (map.size() != 0)
         {
             return map;
         }
-        if(userMapper.selectByUsername(username) != null)
+        if (userMapper.selectByUsername(username) != null)
         {
             map.put("msg", "用户名已存在");
             return map;
@@ -75,7 +75,7 @@ public class UserServiceImpl implements IUserService
         user.setUsername(username);
         user.setSalt(UUID.randomUUID().toString().substring(0, 5));
         user.setPassword(MD5.encode(password + user.getSalt()));
-        user.setHeadUrl("url");
+        user.setHeadUrl("https://avatars3.githubusercontent.com/u/4" + (int) Math.random() * 700000 + 77777 + "?s=400&v=4");
         userMapper.insert(user);
         LoginTicket loginTicket = sentTicket(user.getId());
         map.put("ticket", loginTicket.getTicket());
@@ -86,12 +86,12 @@ public class UserServiceImpl implements IUserService
     public Map<String, String> login(String username, String password)
     {
         Map<String, String> map = checkParams(username, password);
-        if(map.size() != 0)
+        if (map.size() != 0)
         {
             return map;
         }
         User user = userMapper.selectByUsername(username);
-        if(user == null || !user.getPassword().equals(MD5.encode(password + user.getSalt())))
+        if (user == null || !user.getPassword().equals(MD5.encode(password + user.getSalt())))
         {
             map.put("msg", "用户名或密码错误");
             return map;

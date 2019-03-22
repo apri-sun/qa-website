@@ -80,31 +80,9 @@ public class MD5
     }
 
 //	public static void main(String args[]) {
-//		MD5 m = new MD5();
-//		if (Array.getLength(args) == 0) {
-//			System.out.println("MD5 Test suite:");
-//			System.out.println("MD5(\"\"):".concat(String.valueOf(String
-//					.valueOf(m.getMD5ofStr("")))));
-//			System.out.println("MD5(\"a\"):".concat(String.valueOf(String
-//					.valueOf(m.getMD5ofStr("a")))));
-//			System.out.println("MD5(\"abc\"):".concat(String.valueOf(String
-//					.valueOf(m.getMD5ofStr("abc")))));
-//			System.out.println("MD5(\"message digest\"):".concat(String
-//					.valueOf(String.valueOf(m.getMD5ofStr("message digest")))));
-//			System.out.println("MD5(\"abcdefghijklmnopqrstuvwxyz\"):"
-//					.concat(String.valueOf(String.valueOf(m
-//							.getMD5ofStr("abcdefghijklmnopqrstuvwxyz")))));
-//			System.out
-//					.println("MD5(\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\"):"
-//							.concat(String
-//									.valueOf(String
-//											.valueOf(m
-//													.getMD5ofStr("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")))));
-//		} else
-//			System.out.println(String.valueOf(String.valueOf((new StringBuffer(
-//					"MD5(")).append(args[0]).append(")=").append(
-//					m.getMD5ofStr(args[0])))));
-//	}
+//        String encode = MD5.encode("6146024f");
+//        System.out.println(encode);
+//    }
 
     private long state[];
 
