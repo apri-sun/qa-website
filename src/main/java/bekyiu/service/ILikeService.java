@@ -8,7 +8,7 @@ public interface ILikeService
      * @param entityType
      * @return 返回当前entity有多少人喜欢
      */
-    Long getLikeCount(Integer entityId, Integer entityType);
+    Long getLikeCount(Long entityId, Integer entityType);
 
     /**
      * 返回这个用户对这个entity是否喜欢
@@ -17,7 +17,7 @@ public interface ILikeService
      * @param entityType
      * @return 1表示喜欢, -1表示不喜欢, 0表示没有操作过
      */
-    Integer getLikeStatus(Long userId, Integer entityId, Integer entityType);
+    Integer getLikeStatus(Long userId, Long entityId, Integer entityType);
 
     /**
      * 点赞
@@ -26,7 +26,7 @@ public interface ILikeService
      * @param entityType 点赞对象的类型
      * @return 返回点赞的总数量
      */
-    Long addLike(Long userId, Integer entityId, Integer entityType);
+    Long addLike(Long userId, Long entityId, Integer entityType);
 
     /**
      * 点踩
@@ -34,5 +34,5 @@ public interface ILikeService
      * @param entityId
      * @param entityType
      */
-    Long addDislike(Long userId, Integer entityId, Integer entityType);
+    Long addDislike(Long userId, Long entityId, Integer entityType);
 }

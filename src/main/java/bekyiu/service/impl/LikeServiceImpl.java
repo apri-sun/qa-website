@@ -13,14 +13,14 @@ public class LikeServiceImpl implements ILikeService
     JedisAdapter jedisAdapter;
 
     @Override
-    public Long getLikeCount(Integer entityId, Integer entityType)
+    public Long getLikeCount(Long entityId, Integer entityType)
     {
         String likeKey = RedisKeyGenerator.getLikeKey(entityId, entityType);
         return jedisAdapter.scard(likeKey);
     }
 
     @Override
-    public Integer getLikeStatus(Long userId, Integer entityId, Integer entityType)
+    public Integer getLikeStatus(Long userId, Long entityId, Integer entityType)
     {
         String likeKey = RedisKeyGenerator.getLikeKey(entityId, entityType);
         if (jedisAdapter.sismember(likeKey, String.valueOf(userId)))
@@ -32,7 +32,7 @@ public class LikeServiceImpl implements ILikeService
     }
 
     @Override
-    public Long addLike(Long userId, Integer entityId, Integer entityType)
+    public Long addLike(Long userId, Long entityId, Integer entityType)
     {
         String likeKey = RedisKeyGenerator.getLikeKey(entityId, entityType);
         String dislikeKey = RedisKeyGenerator.getDislikeKey(entityId, entityType);
@@ -40,7 +40,7 @@ public class LikeServiceImpl implements ILikeService
     }
 
     @Override
-    public Long addDislike(Long userId, Integer entityId, Integer entityType)
+    public Long addDislike(Long userId, Long entityId, Integer entityType)
     {
         String likeKey = RedisKeyGenerator.getLikeKey(entityId, entityType);
         String dislikeKey = RedisKeyGenerator.getDislikeKey(entityId, entityType);

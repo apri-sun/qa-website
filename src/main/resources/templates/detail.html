@@ -142,10 +142,13 @@
                         <button class="up" aria-pressed="false" title="赞同">
                             <i class="icon vote-arrow"></i>
                             <span class="count">28</span>
-                            <span class="label sr-only">赞同</span></button>
+                            <span class="label sr-only">赞同</span>
+                        </button>
+                        <input type="hidden" th:value="${vo.get('comment').id}"/>
                         <button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
                             <i class="icon vote-arrow"></i>
-                            <span class="label sr-only">反对，不会显示你的姓名</span></button>
+                            <span class="label sr-only">反对，不会显示你的姓名</span>
+                        </button>
                     </div>
                     <div class="answer-head">
                         <div class="zm-item-answer-author-info">
@@ -546,3 +549,59 @@
 
 </body>
 </html>
+
+<!--点赞ajax-->
+<script>
+    $(function()
+    {
+        $(".up").click(function()
+        {
+            var $this = $(this)
+            if($this.hasClass("pressed"))
+            {
+                return
+            }
+            var commentId = $this.next().val()
+            $.post("/like", {"commentId" : commentId}, function (backData)
+            {
+                if(backData.code == 0)
+                {
+                    var old = $this.find(".count").text()
+                    $this.find(".count").text(Number(old) + 1)
+                    $this.addClass("pressed")
+                    $this.next().next().removeClass("pressed")
+                }
+                else
+                {
+                    window.location.href = "/loginToHtml"
+                }
+            }, "json")
+        })
+
+
+        $(".down").click(function()
+        {
+            var $this = $(this)
+            if($this.hasClass("pressed"))
+            {
+                return
+            }
+            var commentId = $this.prev().val()
+            $.post("/dislike", {"commentId" : commentId}, function (backData)
+            {
+                if(backData.code == 0)
+                {
+                    var $likeBtn = $this.prev().prev()
+                    var old = $likeBtn.find(".count").text()
+                    $likeBtn.find(".count").text(Number(old) - 1)
+                    $this.addClass("pressed")
+                    $likeBtn.removeClass("pressed")
+                }
+                else
+                {
+                    window.location.href = "/loginToHtml"
+                }
+            }, "json")
+        })
+    })
+</script>

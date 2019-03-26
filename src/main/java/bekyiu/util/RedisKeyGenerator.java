@@ -8,12 +8,12 @@ public class RedisKeyGenerator
     public static final String BIZ_DISLIKE = "DISLIKE";
 
     //得到对于当前想点赞的对象的key
-    public static String getLikeKey(Integer entityId, Integer entityType)
+    public static String getLikeKey(Long entityId, Integer entityType)
     {
         return BIZ_LIKE + SPLIT + entityType + SPLIT + entityId;
     }
 
-    public static String getDislikeKey(Integer entityId, Integer entityType)
+    public static String getDislikeKey(Long entityId, Integer entityType)
     {
         return BIZ_DISLIKE + SPLIT + entityType + SPLIT + entityId;
     }
