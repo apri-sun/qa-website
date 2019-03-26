@@ -5,6 +5,7 @@ import bekyiu.domain.HostHolder;
 import bekyiu.domain.Question;
 import bekyiu.domain.ViewObject;
 import bekyiu.service.ICommentService;
+import bekyiu.service.ILikeService;
 import bekyiu.service.IQuestionService;
 import bekyiu.service.IUserService;
 import bekyiu.util.EntityType;
@@ -32,6 +33,8 @@ public class QuestionController
     private IUserService userService;
     @Autowired
     private ICommentService commentService;
+    @Autowired
+    private ILikeService likeService;
 
     @RequestMapping("/question/add")
     @ResponseBody
@@ -67,6 +70,16 @@ public class QuestionController
             ViewObject vo = new ViewObject();
             vo.put("comment", comment);
             vo.put("user", userService.get(comment.getUserId()));
+            vo.put("likeCount", likeService.getLikeCount(comment.getId(), EntityType.ENTITY_COMMENT));
+            if (hostHolder.getUser().getId() == null)
+            {
+                vo.put("likeStatus", 0);
+            }
+            else
+            {
+                vo.put("likeStatus", likeService.getLikeStatus(hostHolder.getUser().getId(),
+                        comment.getId(), EntityType.ENTITY_COMMENT));
+            }
             vos.add(vo);
         }
         model.addAttribute("vos", vos);

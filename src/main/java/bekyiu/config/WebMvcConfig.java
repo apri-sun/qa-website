@@ -27,6 +27,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
     {
         //拦截器的注册顺序就是调用的顺序
         registry.addInterceptor(passportInterceptor).addPathPatterns("/**").excludePathPatterns("/loginToHtml", "/reg", "/login");
+        //ajax请求没有作用?
         registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/user/*");
     }
 }

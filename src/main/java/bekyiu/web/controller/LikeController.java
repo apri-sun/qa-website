@@ -21,26 +21,23 @@ public class LikeController
     @ResponseBody
     public String like(Long commentId)
     {
-//        if(hostHolder.getUser() == null || hostHolder.getUser().getUsername() == null)
-//        {
-//            return JsonUtil.getJsonString(1, "请先登录");
-//        }
-//        likeService.addLike(hostHolder.getUser().getId(), commentId, EntityType.ENTITY_COMMENT);
-//        return JsonUtil.getJsonString(0, String.valueOf(likeService.getLikeCount(commentId, EntityType.ENTITY_COMMENT)));
-        return JsonUtil.getJsonString(0);
+        if(hostHolder.getUser() == null || hostHolder.getUser().getUsername() == null)
+        {
+            return JsonUtil.getJsonString(1);
+        }
+        likeService.addLike(hostHolder.getUser().getId(), commentId, EntityType.ENTITY_COMMENT);
+        return JsonUtil.getJsonString(0, String.valueOf(likeService.getLikeCount(commentId, EntityType.ENTITY_COMMENT)));
     }
 
     @RequestMapping("/dislike")
     @ResponseBody
     public String dislike(Long commentId)
     {
-//        if(hostHolder.getUser() == null || hostHolder.getUser().getUsername() == null)
-//        {
-//            return JsonUtil.getJsonString(1, "请先登录");
-//        }
-//        likeService.addDislike(hostHolder.getUser().getId(), commentId, EntityType.ENTITY_COMMENT);
-//        return JsonUtil.getJsonString(0, String.valueOf(likeService.getLikeCount(commentId, EntityType.ENTITY_COMMENT)));
-
-        return JsonUtil.getJsonString(0);
+        if(hostHolder.getUser() == null || hostHolder.getUser().getUsername() == null)
+        {
+            return JsonUtil.getJsonString(1);
+        }
+        likeService.addDislike(hostHolder.getUser().getId(), commentId, EntityType.ENTITY_COMMENT);
+        return JsonUtil.getJsonString(0, String.valueOf(likeService.getLikeCount(commentId, EntityType.ENTITY_COMMENT)));
     }
 }
