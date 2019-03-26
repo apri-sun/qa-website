@@ -36,7 +36,7 @@ public class JedisAdapter implements InitializingBean
                 jedis.close();
             }
         }
-        return -1L;
+        return null;
     }
     public Long scard(String key)
     {
@@ -57,7 +57,7 @@ public class JedisAdapter implements InitializingBean
                 jedis.close();
             }
         }
-        return -1L;
+        return null;
     }
     public Boolean sismember(String key, String value)
     {
@@ -78,7 +78,7 @@ public class JedisAdapter implements InitializingBean
                 jedis.close();
             }
         }
-        return false;
+        return null;
     }
     public Long srem(String key, String... value)
     {
@@ -99,7 +99,7 @@ public class JedisAdapter implements InitializingBean
                 jedis.close();
             }
         }
-        return -1L;
+        return null;
     }
 
 }

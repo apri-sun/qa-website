@@ -58,7 +58,9 @@ public class QaApplicationTests
     @Test
     public void delete()
     {
-        userMapper.deleteByPrimaryKey(1L);
+        //userMapper.deleteByPrimaryKey(1L);
+        String a = "akhdwiuehwehifuiuwefhqwd";
+        System.out.println(a.contains("uwegfhq"));
     }
 
     @Test

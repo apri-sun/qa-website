@@ -15,7 +15,7 @@ public interface ILikeService
      * @param userId
      * @param entityId
      * @param entityType
-     * @return 1表示喜欢, 0表示不喜欢
+     * @return 1表示喜欢, -1表示不喜欢, 0表示没有操作过
      */
     Integer getLikeStatus(Long userId, Integer entityId, Integer entityType);
 
