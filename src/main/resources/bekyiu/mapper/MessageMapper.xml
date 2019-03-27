@@ -53,7 +53,7 @@
     </select>
 
     <select id="getByConversationId" resultMap="BaseResultMap">
-        SELECT * FROM message WHERE conversation_id = #{conversationId}
+        SELECT * FROM message WHERE conversation_id = #{conversationId} ORDER BY created_date DESC
         LIMIT #{offset}, #{limit}
     </select>
     <select id="getConversationList" resultMap="voMap">
