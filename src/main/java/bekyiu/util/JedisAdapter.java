@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //默认单例
@@ -147,6 +148,6 @@ public class JedisAdapter implements InitializingBean
                 jedis.close();
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 }

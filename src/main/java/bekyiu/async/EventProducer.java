@@ -15,10 +15,10 @@ public class EventProducer
 
     public Boolean fireEvent(EventModel eventModel)
     {
-        String queueKey = RedisKeyGenerator.getEventQueueKey();
-        String model = JSONObject.toJSONString(eventModel);
         try
         {
+            String queueKey = RedisKeyGenerator.getEventQueueKey();
+            String model = JSONObject.toJSONString(eventModel);
             //阻塞队列用redis实现
             jedisAdapter.lpush(queueKey, model);
             return true;
