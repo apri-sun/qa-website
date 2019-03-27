@@ -8,4 +8,7 @@ public class EntityType
 
     public static Integer HAS_READ = 1;
     public static Integer NOT_READ = 0;
+
+    public static Long ANONYMOUS_USER_ID = 1L;
+    public static Long SYSTEM_USER_ID = 2L;
 }

@@ -1,6 +1,11 @@
 package bekyiu.web.controller;
 
+import bekyiu.async.EventModel;
+import bekyiu.async.EventProducer;
+import bekyiu.async.EventType;
+import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
+import bekyiu.service.ICommentService;
 import bekyiu.service.ILikeService;
 import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
@@ -16,6 +21,10 @@ public class LikeController
     private HostHolder hostHolder;
     @Autowired
     private ILikeService likeService;
+    @Autowired
+    private EventProducer eventProducer;
+    @Autowired
+    private ICommentService commentService;
 
     @RequestMapping("/like")
     @ResponseBody
@@ -26,6 +35,16 @@ public class LikeController
             return JsonUtil.getJsonString(1);
         }
         likeService.addLike(hostHolder.getUser().getId(), commentId, EntityType.ENTITY_COMMENT);
+        //push
+        Comment comment = commentService.get(commentId);
+        eventProducer.fireEvent(new EventModel()
+                .setType(EventType.LIKE)
+                .setActorId(hostHolder.getUser().getId())
+                .setEntityType(EntityType.ENTITY_COMMENT)
+                .setEntityId(commentId)
+                .setEntityOwnerId(comment.getUserId())
+                .setExts("questionId", String.valueOf(comment.getEntityId())));
+
         return JsonUtil.getJsonString(0, String.valueOf(likeService.getLikeCount(commentId, EntityType.ENTITY_COMMENT)));
     }
 

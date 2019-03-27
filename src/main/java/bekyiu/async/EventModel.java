@@ -9,7 +9,7 @@ public class EventModel
     //触发什么类型的事件
     private EventType type;
     //触发者
-    private Integer actorId;
+    private Long actorId;
     //触发的载体
     private Integer entityType;
     private Long entityId;
@@ -43,12 +43,12 @@ public class EventModel
         return this;
     }
 
-    public Integer getActorId()
+    public Long getActorId()
     {
         return actorId;
     }
 
-    public EventModel setActorId(Integer actorId)
+    public EventModel setActorId(Long actorId)
     {
         this.actorId = actorId;
         return this;
