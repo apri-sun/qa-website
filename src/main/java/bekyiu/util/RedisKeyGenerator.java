@@ -6,6 +6,7 @@ public class RedisKeyGenerator
     public static final String SPLIT = ":";
     public static final String BIZ_LIKE = "LIKE";
     public static final String BIZ_DISLIKE = "DISLIKE";
+    public static final String BIZ_EVENT_QUEUE = "EVENT_QUEUE";
 
     //得到对于当前想点赞的对象的key
     public static String getLikeKey(Long entityId, Integer entityType)
@@ -16,5 +17,10 @@ public class RedisKeyGenerator
     public static String getDislikeKey(Long entityId, Integer entityType)
     {
         return BIZ_DISLIKE + SPLIT + entityType + SPLIT + entityId;
+    }
+
+    public static String getEventQueueKey()
+    {
+        return BIZ_EVENT_QUEUE;
     }
 }
