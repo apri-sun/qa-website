@@ -20,4 +20,7 @@ public interface ICommentService
     List<Comment> selectCommentByEntity(Integer entityType, Long entityId);
 
     Integer getCommentCount(Integer entityType, Long entityId);
+
+    //查询这个用户的所有评论
+    List<Comment> getByUserId(Long userId);
 }

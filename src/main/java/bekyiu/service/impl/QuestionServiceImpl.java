@@ -74,4 +74,11 @@ public class QuestionServiceImpl implements IQuestionService
     {
         return questionMapper.updateCommentCount(id, commentCount);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Question> getQuestionByUserId(Long userId)
+    {
+        return questionMapper.getQuestionByUserId(userId);
+    }
 }

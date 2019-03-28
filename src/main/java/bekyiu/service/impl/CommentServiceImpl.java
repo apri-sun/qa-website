@@ -71,4 +71,11 @@ public class CommentServiceImpl implements ICommentService
     {
         return commentMapper.getCommentCount(entityType, entityId);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Comment> getByUserId(Long userId)
+    {
+        return commentMapper.getByUserId(userId);
+    }
 }

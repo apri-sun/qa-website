@@ -23,4 +23,6 @@ public interface CommentMapper
     List<Comment> selectCommentByEntity(@Param("entityType") Integer entityType, @Param("entityId") Long entityId);
 
     Integer getCommentCount(@Param("entityType") Integer entityType, @Param("entityId") Long entityId);
+
+    List<Comment> getByUserId(Long userId);
 }

@@ -52,4 +52,7 @@
         set comment_count = #{commentCount}
         where id = #{id}
     </update>
+    <select id="getQuestionByUserId" resultMap="BaseResultMap">
+        SELECT * FROM question WHERE user_id = #{userId}
+    </select>
 </mapper>

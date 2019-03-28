@@ -19,4 +19,6 @@ public interface IQuestionService
     List<Question> getLatestQuestions(Integer userId, Integer offset, Integer limit);
 
     Integer updateCommentCount(Long id, Integer commentCount);
+
+    List<Question> getQuestionByUserId(Long userId);
 }

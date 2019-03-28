@@ -42,4 +42,8 @@
     <select id="getCommentCount" resultType="int">
         SELECT COUNT(id) FROM comment WHERE entity_id = #{entityId} AND entity_type = #{entityType}
     </select>
+
+    <select id="getByUserId" resultMap="BaseResultMap">
+        SELECT * FROM comment WHERE user_id = #{userId}
+    </select>
 </mapper>
