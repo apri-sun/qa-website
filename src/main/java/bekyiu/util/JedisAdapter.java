@@ -7,6 +7,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 //默认单例
 @Component
@@ -20,6 +21,7 @@ public class JedisAdapter implements InitializingBean
         pool = new JedisPool("redis://localhost:6379/1");
     }
 
+    //set
     public Long sadd(String key, String... value)
     {
         Jedis jedis = null;
@@ -149,5 +151,91 @@ public class JedisAdapter implements InitializingBean
             }
         }
         return new ArrayList<>();
+    }
+
+    //zset
+    public Long zadd(String key, Double score, String value)
+    {
+        Jedis jedis = null;
+        try
+        {
+            jedis = pool.getResource();
+            return jedis.zadd(key, score, value);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+    public Long zrem(String key, String... value)
+    {
+        Jedis jedis = null;
+        try
+        {
+            jedis = pool.getResource();
+            return jedis.zrem(key, value);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+    public Long zcard(String key)
+    {
+        Jedis jedis = null;
+        try
+        {
+            jedis = pool.getResource();
+            return jedis.zcard(key);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+    public Set<String> zrevrange(String key, Long start, Long stop)
+    {
+        Jedis jedis = null;
+        try
+        {
+            jedis = pool.getResource();
+            return jedis.zrevrange(key, start, stop);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
     }
 }
