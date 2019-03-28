@@ -15,4 +15,13 @@ public interface IFollowService
 
     //获取当前用户的关注对象
     List<Integer> getFollowees(Long userId, Integer entityType, Long start, Long stop);
+
+    //当前实体有多少个粉丝
+    Long getFollowerCount(Long entityId, Integer entityType);
+
+    //当前用户关注了某个类型的实体的个数
+    Long getFolloweeCount(Long userId, Integer entityType);
+
+    //当前用户是否是某个实体的粉丝
+    Boolean isFollower(Long userId, Long entityId, Integer entityType);
 }

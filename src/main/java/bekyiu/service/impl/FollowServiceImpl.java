@@ -71,6 +71,28 @@ public class FollowServiceImpl implements IFollowService
         return set2List(followees);
     }
 
+    @Override
+    public Long getFollowerCount(Long entityId, Integer entityType)
+    {
+        String followerKey = RedisKeyGenerator.getFollowerKey(entityId, entityType);
+        return jedisAdapter.zcard(followerKey);
+    }
+
+    @Override
+    public Long getFolloweeCount(Long userId, Integer entityType)
+    {
+        String followeeKey = RedisKeyGenerator.getFolloweeKey(userId, entityType);
+        return jedisAdapter.zcard(followeeKey);
+    }
+
+    @Override
+    public Boolean isFollower(Long userId, Long entityId, Integer entityType)
+    {
+        String followerKey = RedisKeyGenerator.getFollowerKey(entityId, entityType);
+        Double score = jedisAdapter.zscore(followerKey, String.valueOf(userId));
+        return score != null;
+    }
+
 
     //
     private List<Integer> set2List(Set<String> set)

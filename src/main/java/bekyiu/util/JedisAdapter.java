@@ -246,6 +246,28 @@ public class JedisAdapter implements InitializingBean
         return null;
     }
 
+    public Double zscore(String key, String value)
+    {
+        Jedis jedis = null;
+        try
+        {
+            jedis = pool.getResource();
+            return jedis.zscore(key, value);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+
     public Jedis getJedis()
     {
         return pool.getResource();
