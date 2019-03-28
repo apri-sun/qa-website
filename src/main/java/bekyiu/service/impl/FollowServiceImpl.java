@@ -5,8 +5,6 @@ import bekyiu.util.JedisAdapter;
 import bekyiu.util.RedisKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.Transaction;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,13 +27,17 @@ public class FollowServiceImpl implements IFollowService
         //得到A关注列表的key
         String followeeKey = RedisKeyGenerator.getFolloweeKey(userId, entityType);
         Date date = new Date();
-        //redis事务
-        Jedis jedis = jedisAdapter.getJedis();
-        Transaction tx = jedisAdapter.multi(jedis);
-        jedisAdapter.zadd(followerKey, (double) date.getTime(), String.valueOf(userId));
-        jedisAdapter.zadd(followeeKey, (double) date.getTime(), String.valueOf(entityId));
-        List<Object> exec = jedisAdapter.exec(tx, jedis);
-        return exec != null && exec.size() == 2 && exec.get(0) != null && exec.get(1) != null;
+        try
+        {
+            jedisAdapter.zadd(followerKey, (double) date.getTime(), String.valueOf(userId));
+            jedisAdapter.zadd(followeeKey, (double) date.getTime(), String.valueOf(entityId));
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -46,13 +48,17 @@ public class FollowServiceImpl implements IFollowService
         String followerKey = RedisKeyGenerator.getFollowerKey(entityId, entityType);
         //得到A关注列表的key
         String followeeKey = RedisKeyGenerator.getFolloweeKey(userId, entityType);
-        //redis事务
-        Jedis jedis = jedisAdapter.getJedis();
-        Transaction tx = jedisAdapter.multi(jedis);
-        jedisAdapter.zrem(followerKey, String.valueOf(userId));
-        jedisAdapter.zrem(followeeKey, String.valueOf(entityId));
-        List<Object> exec = jedisAdapter.exec(tx, jedis);
-        return exec != null && exec.size() == 2 && exec.get(0) != null && exec.get(1) != null;
+        try
+        {
+            jedisAdapter.zrem(followerKey, String.valueOf(userId));
+            jedisAdapter.zrem(followeeKey, String.valueOf(entityId));
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

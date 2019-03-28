@@ -8,10 +8,14 @@ import bekyiu.service.IFollowService;
 import bekyiu.service.IUserService;
 import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class FollowController
@@ -40,9 +44,12 @@ public class FollowController
                 .setEntityOwnerId(userId)
                 .setEntityId(userId)
                 .setEntityType(EntityType.ENTITY_USER));
-        // 返回关注的人数
-        return JsonUtil.getJsonString(ret ? 0 : 1,
-                followService.getFolloweeCount(hostHolder.getUser().getId(), EntityType.ENTITY_USER) + "");
+
+        //
+        Map<String, Object> json = new HashMap<>();
+        json.put("code", ret ? 0 : 1);
+        json.put("followerCount", followService.getFollowerCount(userId, EntityType.ENTITY_USER));
+        return JSON.toJSONString(json);
     }
 
     @RequestMapping("/unfollowUser")
@@ -60,8 +67,10 @@ public class FollowController
                 .setEntityOwnerId(userId)
                 .setEntityId(userId)
                 .setEntityType(EntityType.ENTITY_USER));
-        // 返回关注的人数
-        return JsonUtil.getJsonString(ret ? 0 : 1,
-                followService.getFolloweeCount(hostHolder.getUser().getId(), EntityType.ENTITY_USER) + "");
+        //
+        Map<String, Object> json = new HashMap<>();
+        json.put("code", ret ? 0 : 1);
+        json.put("followerCount", followService.getFollowerCount(userId, EntityType.ENTITY_USER));
+        return JSON.toJSONString(json);
     }
 }
