@@ -4,6 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Long scard(String key)
     {
         Jedis jedis = null;
@@ -64,6 +66,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Boolean sismember(String key, String value)
     {
         Jedis jedis = null;
@@ -85,6 +88,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Long srem(String key, String... value)
     {
         Jedis jedis = null;
@@ -175,6 +179,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Long zrem(String key, String... value)
     {
         Jedis jedis = null;
@@ -196,6 +201,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Long zcard(String key)
     {
         Jedis jedis = null;
@@ -217,6 +223,7 @@ public class JedisAdapter implements InitializingBean
         }
         return null;
     }
+
     public Set<String> zrevrange(String key, Long start, Long stop)
     {
         Jedis jedis = null;
@@ -232,6 +239,50 @@ public class JedisAdapter implements InitializingBean
         finally
         {
             if (jedis != null)
+            {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+
+    public Jedis getJedis()
+    {
+        return pool.getResource();
+    }
+
+    //事务
+    public Transaction multi(Jedis jedis)
+    {
+        try
+        {
+            return jedis.multi();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Object> exec(Transaction tx, Jedis jedis)
+    {
+        try
+        {
+            return tx.exec();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            tx.discard();
+        }
+        finally
+        {
+            if(tx != null)
+            {
+                tx.close();
+            }
+            if(jedis != null)
             {
                 jedis.close();
             }
