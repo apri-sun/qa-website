@@ -50,9 +50,10 @@
                     <div class="zh-general-list clearfix">
                         <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard">
                             <div class="zg-right">
-                                <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0">关注ta</button>
+                                <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0" id="follow">关注ta</button>
                                 <!--<button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0">取消关注</button>-->
                             </div>
+                            <input type="hidden" id="thisUserId" th:value="${thisUser.id}">
                             <a th:title="${thisUser.username}" title="Barty" class="zm-item-link-avatar" href="/people/buaabarty">
                                 <img src="#" th:src="${thisUser.headUrl}" class="zm-item-img-avatar">
                             </a>
@@ -348,6 +349,22 @@
                     window.location.href = "/loginToHtml"
                 }
             }, "json");
+        })
+
+        $("#follow").click(function()
+        {
+            var userId = $("#thisUserId").val()
+            $.post("/followUser", {"userId" : userId}, function (backData)
+            {
+                if(backData.code == 0)
+                {
+                    //$("#follow").
+                }
+                else
+                {
+
+                }
+            })
         })
     })
 </script>
