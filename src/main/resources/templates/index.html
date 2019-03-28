@@ -41,7 +41,7 @@
         <div class="zm-profile-section-wrap zm-profile-followee-page" th:if="${isShowUserInfo}">
             <div class="zm-profile-section-head">
                     <span class="zm-profile-section-name">
-                        <a href="#" th:text="${vos.get(0).get('user').username}">叶向宇</a> 关注了 <span>70</span> 人
+                        <!--<a href="#" th:text="${vos.get(0).get('user').username}">叶向宇</a> 关注了 <span>70</span> 人-->
                     </span>
                 <!--<a class="zg-right zg-link-litblue-normal zm-profile-answer-page-return" href="/people/zjuyxy">返回个人主页</a>-->
             </div>
@@ -50,13 +50,14 @@
                     <div class="zh-general-list clearfix">
                         <div class="zm-profile-card zm-profile-section-item zg-clear no-hovercard">
                             <div class="zg-right">
-                                <button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0">取消关注</button>
+                                <button class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0">关注ta</button>
+                                <!--<button class="zg-btn zg-btn-unfollow zm-rich-follow-btn small nth-0">取消关注</button>-->
                             </div>
-                            <a th:title="${vos.get(0).get('user').username}" title="Barty" class="zm-item-link-avatar" href="/people/buaabarty">
-                                <img src="#" th:src="${vos.get(0).get('user').headUrl}" class="zm-item-img-avatar">
+                            <a th:title="${thisUser.username}" title="Barty" class="zm-item-link-avatar" href="/people/buaabarty">
+                                <img src="#" th:src="${thisUser.headUrl}" class="zm-item-img-avatar">
                             </a>
                             <div class="zm-list-content-medium">
-                                <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" th:text="${vos.get(0).get('user').username}" href="#" class="zg-link" title="Barty">Barty</a></h2>
+                                <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" th:text="${thisUser.username}" href="#" class="zg-link" title="Barty">Barty</a></h2>
 
                                 <div class="zg-big-gray"></div>
                                 <div class="details zg-gray">
@@ -64,7 +65,7 @@
                                     /
                                     <a target="_blank" href="/people/buaabarty/asks" class="zg-link-gray-normal" th:text="${followeeCount + ' 关注的人'}">0 提问</a>
                                     /
-                                    <a target="_blank" href="/people/buaabarty/asks" class="zg-link-gray-normal" th:text="${askCount + ' 提问'}">0 提问</a>
+                                    <a target="_blank" href="#" class="zg-link-gray-normal" th:text="${askCount + ' 提问'}">0 提问</a>
                                     /
                                     <a target="_blank" href="/people/buaabarty/answers" class="zg-link-gray-normal" th:text="${commentNum + ' 回答'}">21 回答</a>
                                     /

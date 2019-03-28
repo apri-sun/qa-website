@@ -60,6 +60,7 @@ public class HomeController
         }
         model.addAttribute("vos", vos);
         model.addAttribute("isShowUserInfo", true);
+        model.addAttribute("thisUser", userService.get(userId));
         model.addAttribute("followerCount", followService.getFollowerCount(userId, EntityType.ENTITY_USER));
         model.addAttribute("followeeCount", followService.getFolloweeCount(userId, EntityType.ENTITY_USER));
 
