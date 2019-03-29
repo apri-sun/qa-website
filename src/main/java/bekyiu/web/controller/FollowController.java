@@ -3,10 +3,11 @@ package bekyiu.web.controller;
 import bekyiu.async.EventModel;
 import bekyiu.async.EventProducer;
 import bekyiu.async.EventType;
+import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
-import bekyiu.service.IFollowService;
-import bekyiu.service.IQuestionService;
-import bekyiu.service.IUserService;
+import bekyiu.domain.User;
+import bekyiu.domain.ViewObject;
+import bekyiu.service.*;
 import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
 import com.alibaba.fastjson.JSON;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -33,6 +36,10 @@ public class FollowController
     private EventProducer eventProducer;
     @Autowired
     private IQuestionService questionService;
+    @Autowired
+    private ICommentService commentService;
+    @Autowired
+    private ILikeService likeService;
 
     @RequestMapping("/followUser")
     @ResponseBody
@@ -114,10 +121,46 @@ public class FollowController
         return getBackInfo(questionId, EntityType.ENTITY_QUESTION, ret);
     }
 
-    //跳转到粉丝列表
+    //跳转到这个userId的粉丝列表
     @RequestMapping("/user/{userId}/followers")
     public String followerList(Model model, @PathVariable Long userId)
     {
+        List<Integer> followersId = followService.getFollowers(userId, EntityType.ENTITY_USER, 0L, -1L);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Integer id : followersId)
+        {
+            ViewObject vo = new ViewObject();
+            User follower = userService.get((long) id);
+            vo.put("follower", follower);
+            vo.put("followerCount", followService.getFollowerCount(follower.getId(), EntityType.ENTITY_USER));
+            vo.put("followeeCount", followService.getFolloweeCount(follower.getId(), EntityType.ENTITY_USER));
+            vo.put("askCount", questionService.getQuestionByUserId(follower.getId()).size());
+
+            //这个user一共收到过多少个赞
+            List<Comment> curUserComments = commentService.getByUserId(follower.getId());
+            Long likeCount = 0L;
+            Long commentNum = 0L; //回答问题的数量
+            for (Comment comment : curUserComments)
+            {
+                if(comment.getEntityType().equals(EntityType.ENTITY_QUESTION))
+                {
+                    commentNum++;
+                }
+                likeCount += likeService.getLikeCount(comment.getId(), EntityType.ENTITY_COMMENT);
+            }
+            vo.put("commentNum", commentNum);
+            vo.put("likeCount", likeCount);
+            //如果来到的是自己的粉丝列表 就要看下自己是否关注了这些粉丝
+            if(userId.equals(hostHolder.getUser().getId()))
+            {
+                vo.put("isFollowedByMe", followService.isFollower(hostHolder.getUser().getId(), follower.getId(), EntityType.ENTITY_USER));
+            }
+            vos.add(vo);
+        }
+        model.addAttribute("vos", vos);
+        model.addAttribute("curUser", userService.get(userId));
+        model.addAttribute("followerCount", followersId.size());
+
         return "followList";
     }
 
