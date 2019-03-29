@@ -100,6 +100,20 @@ public class FollowController
         return JSON.toJSONString(json);
     }
 
+    @RequestMapping("/unfollowQuestion")
+    @ResponseBody
+    public String unfollowQuestion(Long questionId)
+    {
+        Map<String, Object> json = new HashMap<>();
+        json.put("code", 0);
+        json.put("followerCount", 9);
+        json.put("me", hostHolder.getUser());
+        return JSON.toJSONString(json);
+    }
+
+
+
+
     //关注人后应该返回的信息
     private String getUserInfo(Long userId, Integer entityType, Boolean ret)
     {

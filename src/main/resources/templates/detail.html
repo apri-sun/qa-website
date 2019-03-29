@@ -622,14 +622,33 @@
             }
             else
             {
-
+                $.post("/unfollowQuestion", {"questionId" : questionId}, function (backData)
+                {
+                    if(backData.code == 0)
+                    {
+                        $("#followQuestion").removeClass("zg-btn-unfollow").addClass("zg-btn-follow").text("关注问题")
+                        $("#followerCount").text(backData.followerCount)
+                        let arr = $(".list.zu-small-avatar-list.zg-clear").children()
+                        $.each(arr, function(index, obj)
+                        {
+                            if($(obj).data("uid") == backData.me.id)
+                            {
+                                $(obj).remove()
+                            }
+                        })
+                    }
+                    else
+                    {
+                        alert("取关问题异常!")
+                    }
+                }, "json")
             }
 
         })
 
         function getUserHtml(me)
         {
-            return `<a data-tip="" class="zm-item-link-avatar" href="" data-original_title="${me.username}">
+            return `<a data-uid="${me.id}" class="zm-item-link-avatar" href="" data-original_title="${me.username}">
                 <img src="${me.headUrl}" class="zm-item-img-avatar">
             </a>`
         }
