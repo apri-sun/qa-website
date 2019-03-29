@@ -126,27 +126,7 @@ public class FollowController
     public String followerList(Model model, @PathVariable Long userId)
     {
         List<Integer> followersId = followService.getFollowers(userId, EntityType.ENTITY_USER, 0L, -1L);
-        List<ViewObject> vos = new ArrayList<>();
-        for (Integer id : followersId)
-        {
-            ViewObject vo = new ViewObject();
-            User follower = userService.get((long) id);
-            vo.put("follower", follower);
-            vo.put("followerCount", followService.getFollowerCount(follower.getId(), EntityType.ENTITY_USER));
-            vo.put("followeeCount", followService.getFolloweeCount(follower.getId(), EntityType.ENTITY_USER));
-            vo.put("askCount", questionService.getQuestionByUserId(follower.getId()).size());
-
-            vo.put("commentNum", commentService.getCommentCountByUserId(follower.getId()));
-            //这个user一共收到过多少个赞
-            vo.put("likeCount", likeService.getSelfLikeCount(follower.getId()));
-            //如果来到的是自己的粉丝列表 就要看下自己是否关注了这些粉丝
-            if (userId.equals(hostHolder.getUser().getId()))
-            {
-                vo.put("isFollowedByMe", followService.isFollower(hostHolder.getUser().getId(), follower.getId(), EntityType.ENTITY_USER));
-            }
-            vos.add(vo);
-        }
-        model.addAttribute("vos", vos);
+        model.addAttribute("vos", getVos(true, followersId, userId));
         model.addAttribute("curUser", userService.get(userId));
         model.addAttribute("followerCount", followersId.size());
         //表示当前页面是粉丝列表
@@ -159,27 +139,7 @@ public class FollowController
     public String followeeList(Model model, @PathVariable Long userId)
     {
         List<Integer> followeesId = followService.getFollowees(userId, EntityType.ENTITY_USER, 0L, -1L);
-        List<ViewObject> vos = new ArrayList<>();
-        for (Integer id : followeesId)
-        {
-            ViewObject vo = new ViewObject();
-            User followee = userService.get((long) id);
-            vo.put("follower", followee);
-            vo.put("followerCount", followService.getFollowerCount(followee.getId(), EntityType.ENTITY_USER));
-            vo.put("followeeCount", followService.getFolloweeCount(followee.getId(), EntityType.ENTITY_USER));
-            vo.put("askCount", questionService.getQuestionByUserId(followee.getId()).size());
-
-            vo.put("commentNum", commentService.getCommentCountByUserId(followee.getId()));
-            //这个user一共收到过多少个赞
-            vo.put("likeCount", likeService.getSelfLikeCount(followee.getId()));
-            //如果来到的是自己的关注列表
-            if (userId.equals(hostHolder.getUser().getId()))
-            {
-                vo.put("isFollowedByMe", true);
-            }
-            vos.add(vo);
-        }
-        model.addAttribute("vos", vos);
+        model.addAttribute("vos", getVos(false, followeesId, userId));
         model.addAttribute("curUser", userService.get(userId));
         model.addAttribute("followerCount", followeesId.size());
         //表示当前页面是关注列表
@@ -200,4 +160,43 @@ public class FollowController
         return JSON.toJSONString(json);
     }
 
+    //跳到 粉丝/关注人 列表需要的vos (每一行需要的数据)
+    private List<ViewObject> getVos(Boolean isFollowerList, List<Integer> ids, Long userId)
+    {
+        List<ViewObject> vos = new ArrayList<>();
+        for (Integer id : ids)
+        {
+            ViewObject vo = new ViewObject();
+            User user = userService.get((long) id);
+            vo.put("follower", user);
+
+            vo.put("followerCount", followService.getFollowerCount(user.getId(), EntityType.ENTITY_USER));
+            vo.put("followeeCount", followService.getFolloweeCount(user.getId(), EntityType.ENTITY_USER));
+
+            vo.put("askCount", questionService.getQuestionByUserId(user.getId()).size());
+
+            vo.put("commentNum", commentService.getCommentCountByUserId(user.getId()));
+            //这个user一共收到过多少个赞
+            vo.put("likeCount", likeService.getSelfLikeCount(user.getId()));
+
+            if (isFollowerList)
+            {
+                //如果来到的是自己的粉丝列表 就要看下自己是否关注了这些粉丝
+                if (userId.equals(hostHolder.getUser().getId()))
+                {
+                    vo.put("isFollowedByMe", followService.isFollower(hostHolder.getUser().getId(), user.getId(), EntityType.ENTITY_USER));
+                }
+            }
+            else
+            {
+                //如果来到的是自己的关注列表
+                if (userId.equals(hostHolder.getUser().getId()))
+                {
+                    vo.put("isFollowedByMe", true);
+                }
+            }
+            vos.add(vo);
+        }
+        return vos;
+    }
 }
