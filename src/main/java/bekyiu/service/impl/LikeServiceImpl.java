@@ -1,16 +1,23 @@
 package bekyiu.service.impl;
 
+import bekyiu.domain.Comment;
+import bekyiu.service.ICommentService;
 import bekyiu.service.ILikeService;
+import bekyiu.util.EntityType;
 import bekyiu.util.JedisAdapter;
 import bekyiu.util.RedisKeyGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LikeServiceImpl implements ILikeService
 {
     @Autowired
     JedisAdapter jedisAdapter;
+    @Autowired
+    private ICommentService commentService;
 
     @Override
     public Long getLikeCount(Long entityId, Integer entityType)
@@ -45,6 +52,23 @@ public class LikeServiceImpl implements ILikeService
         String likeKey = RedisKeyGenerator.getLikeKey(entityId, entityType);
         String dislikeKey = RedisKeyGenerator.getDislikeKey(entityId, entityType);
         return addLikeOrDislike(userId, dislikeKey, likeKey);
+    }
+
+    @Override
+    public Integer getSelfLikeCount(Long userId)
+    {
+        //这个user的所有回答
+        List<Comment> comments = commentService.getByUserId(userId);
+        Long likeCount = 0L;
+        for (Comment comment : comments)
+        {
+            //必须是回答问题
+            if(comment.getEntityType().equals(EntityType.ENTITY_QUESTION))
+            {
+                likeCount += this.getLikeCount(comment.getId(), EntityType.ENTITY_COMMENT);
+            }
+        }
+        return likeCount.intValue();
     }
 
     private Long addLikeOrDislike(Long userId, String k1, String k2)

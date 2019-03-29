@@ -4,6 +4,7 @@ import bekyiu.domain.Comment;
 import bekyiu.mapper.CommentMapper;
 import bekyiu.service.ICommentService;
 import bekyiu.service.ISensitiveWordsService;
+import bekyiu.util.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,5 +78,20 @@ public class CommentServiceImpl implements ICommentService
     public List<Comment> getByUserId(Long userId)
     {
         return commentMapper.getByUserId(userId);
+    }
+
+    @Override
+    public Integer getCommentCountByUserId(Long userId)
+    {
+        List<Comment> comments = this.getByUserId(userId);
+        Integer count = 0;
+        for (Comment comment : comments)
+        {
+            if(comment.getEntityType().equals(EntityType.ENTITY_QUESTION))
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }

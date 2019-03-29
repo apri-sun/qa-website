@@ -23,4 +23,7 @@ public interface ICommentService
 
     //查询这个用户的所有评论
     List<Comment> getByUserId(Long userId);
+
+    //查询这个用户回答问题的总数量
+    Integer getCommentCountByUserId(Long userId);
 }

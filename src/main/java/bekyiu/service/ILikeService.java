@@ -35,4 +35,9 @@ public interface ILikeService
      * @param entityType
      */
     Long addDislike(Long userId, Long entityId, Integer entityType);
+
+    /**
+     * 查询这个用户的所有回答收到过多少个赞
+     */
+    Integer getSelfLikeCount(Long userId);
 }

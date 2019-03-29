@@ -136,20 +136,9 @@ public class FollowController
             vo.put("followeeCount", followService.getFolloweeCount(follower.getId(), EntityType.ENTITY_USER));
             vo.put("askCount", questionService.getQuestionByUserId(follower.getId()).size());
 
+            vo.put("commentNum", commentService.getCommentCountByUserId(follower.getId()));
             //这个user一共收到过多少个赞
-            List<Comment> curUserComments = commentService.getByUserId(follower.getId());
-            Long likeCount = 0L;
-            Long commentNum = 0L; //回答问题的数量
-            for (Comment comment : curUserComments)
-            {
-                if(comment.getEntityType().equals(EntityType.ENTITY_QUESTION))
-                {
-                    commentNum++;
-                }
-                likeCount += likeService.getLikeCount(comment.getId(), EntityType.ENTITY_COMMENT);
-            }
-            vo.put("commentNum", commentNum);
-            vo.put("likeCount", likeCount);
+            vo.put("likeCount", likeService.getSelfLikeCount(follower.getId()));
             //如果来到的是自己的粉丝列表 就要看下自己是否关注了这些粉丝
             if(userId.equals(hostHolder.getUser().getId()))
             {

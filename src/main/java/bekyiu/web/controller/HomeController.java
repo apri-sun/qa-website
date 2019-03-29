@@ -69,19 +69,8 @@ public class HomeController
         model.addAttribute("followeeCount", followService.getFolloweeCount(userId, EntityType.ENTITY_USER));
 
         //这个user一共收到过多少个赞
-        List<Comment> curUserComments = commentService.getByUserId(userId);
-        Long likeCount = 0L;
-        Long commentNum = 0L; //回答问题的数量
-        for (Comment comment : curUserComments)
-        {
-            if(comment.getEntityType().equals(EntityType.ENTITY_QUESTION))
-            {
-                commentNum++;
-            }
-            likeCount += likeService.getLikeCount(comment.getId(), EntityType.ENTITY_COMMENT);
-        }
-        model.addAttribute("commentNum", commentNum);
-        model.addAttribute("likeCount", likeCount);
+        model.addAttribute("commentNum", commentService.getCommentCountByUserId(userId));
+        model.addAttribute("likeCount", likeService.getSelfLikeCount(userId));
         //这个user一共提过几次问题
         model.addAttribute("askCount", questionService.getQuestionByUserId(userId).size());
         return "index";
