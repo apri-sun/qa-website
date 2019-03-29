@@ -62,7 +62,7 @@
             </div>
             <div class="zm-side-section">
                 <div class="zm-side-section-inner" id="zh-question-side-header-wrap">
-                    <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green" data-id="6727688">
+                    <button id="followQuestion" data-follow="q:m:button" class="follow-button zg-btn-follow zg-btn-green" data-qid="66" th:data-qid="${question.id}">
                         关注问题
                     </button>
                     <div class="zg-btn-white goog-inline-block goog-menu-button" id="zh-question-operation-menu"
@@ -89,38 +89,30 @@
                     <div class="zh-question-followers-sidebar">
                         <div class="zg-gray-normal">
                             <a href="">
-                                <strong>9</strong></a>人关注该问题
+                                <strong id="followerCount">9</strong>
+                            </a>人关注该问题
                         </div>
                         <div class="list zu-small-avatar-list zg-clear">
-                                <span class="zm-item-link-avatar">
-                                    <img title="匿名用户" class="zm-item-img-avatar"
-                                         src="../static/images/res/aadd7b895_s.jpg"></span>
+
                             <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href=""
                                data-original_title="奕奕">
                                 <img src="../static/images/res/6ceea810748d179f57cac0baa5cf9592_s.jpg"
-                                     class="zm-item-img-avatar"></a>
+                                     class="zm-item-img-avatar">
+                            </a>
                             <a data-tip="p$b$wang-wu-29-54" class="zm-item-link-avatar" href=""
                                data-original_title="王五">
-                                <img src="../static/images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
+                                <img src="../static/images/res/da8e974dc_s.jpg" class="zm-item-img-avatar">
+                            </a>
                             <a data-tip="p$b$huang-xiang-90-99" class="zm-item-link-avatar" href=""
                                data-original_title="案小声">
                                 <img src="../static/images/res/19456ebfe8b207320735f282769ac635_s.jpg"
-                                     class="zm-item-img-avatar"></a>
+                                     class="zm-item-img-avatar">
+                            </a>
                             <a data-tip="p$b$yingxiaodao" class="zm-item-link-avatar" href="" data-original_title="营销岛">
                                 <img src="../static/images/res/11be4a90ed938abfbab4899df56ee754_s.png"
-                                     class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$hero-hou-23" class="zm-item-link-avatar" href=""
-                               data-original_title="Hero Hou">
-                                <img src="../static/images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$jin-hua-zhang-10" class="zm-item-link-avatar" href=""
-                               data-original_title="荷尔蒙毒品">
-                                <img src="../static/images/res/d207854fffc9e0289fbd6bbbb3986988_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a title="宇轩" data-tip="p$t$yu-xuan-91-11" class="zm-item-link-avatar" href="">
-                                <img src="../static/images/res/1ac7840eeb19ada0bbf85f51702d5784_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a title="尹锋" data-tip="p$t$yin-feng" class="zm-item-link-avatar" href="">
-                                <img src="../static/images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
+                                     class="zm-item-img-avatar">
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -606,5 +598,40 @@
                 }
             }, "json")
         })
+
+        $("#followQuestion").click(function ()
+        {
+            let questionId = $(this).data("qid")
+            if($(this).hasClass("zg-btn-follow"))
+            {
+                $.post("/followQuestion", {"questionId" : questionId}, function (backData)
+                {
+                    if(backData.code == 0)
+                    {
+                        $("#followQuestion").removeClass("zg-btn-follow").addClass("zg-btn-unfollow").text("取消关注")
+                        $("#followerCount").text(backData.followerCount)
+                        let userHtml = getUserHtml(backData.me)
+                        $(".list.zu-small-avatar-list.zg-clear")[0]
+                            .insertAdjacentHTML('afterbegin', userHtml)
+                    }
+                    else
+                    {
+                        alert("关注问题异常!")
+                    }
+                }, "json")
+            }
+            else
+            {
+
+            }
+
+        })
+
+        function getUserHtml(me)
+        {
+            return `<a data-tip="" class="zm-item-link-avatar" href="" data-original_title="${me.username}">
+                <img src="${me.headUrl}" class="zm-item-img-avatar">
+            </a>`
+        }
     })
 </script>

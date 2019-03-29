@@ -44,11 +44,23 @@ public class FollowHandler implements EventHandler
                     "取关了你");
             messageService.save(message);
         }
+        else if(eventModel.getType().equals(EventType.FOLLOW_QUESTION))
+        {
+            message.setContent("用户: " + userService.get(eventModel.getActorId()).getUsername() +
+                    "关注了你的问题, http://127.0.0.1:8080/question/" + eventModel.getExts("questionId"));
+            messageService.save(message);
+        }
+        else if(eventModel.getType().equals(EventType.UNFOLLOW_QUESTION))
+        {
+            message.setContent("用户: " + userService.get(eventModel.getActorId()).getUsername() +
+                    "取关了你的问题, http://127.0.0.1:8080/question/" + eventModel.getExts("questionId"));
+            messageService.save(message);
+        }
     }
 
     @Override
     public List<EventType> getSupportEventTypes()
     {
-        return Arrays.asList(EventType.FOLLOW, EventType.UNFOLLOW);
+        return Arrays.asList(EventType.FOLLOW, EventType.UNFOLLOW, EventType.FOLLOW_QUESTION, EventType.UNFOLLOW_QUESTION);
     }
 }
