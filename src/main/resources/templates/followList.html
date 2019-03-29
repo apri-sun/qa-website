@@ -25,9 +25,13 @@
     <div class="zg-wrap zu-main clearfix " role="main">
         <div class="zm-profile-section-wrap zm-profile-followee-page">
                 <div class="zm-profile-section-head">
-                    <span class="zm-profile-section-name">
+                    <span class="zm-profile-section-name" th:if="${isFollower}">
                         <a href="#" th:href="@{/user/{userId}(userId=${curUser.id})}" th:text="${curUser.username}">叶向宇</a>
                         被 <span th:text="${followerCount}">70</span> 人关注
+                    </span>
+                    <span class="zm-profile-section-name" th:if="${!isFollower}">
+                        <a href="#" th:href="@{/user/{userId}(userId=${curUser.id})}" th:text="${curUser.username}">叶向宇</a>
+                        关注了 <span th:text="${followerCount}">70</span> 人
                     </span>
                     <a class="zg-right zg-link-litblue-normal zm-profile-answer-page-return" href="/people/zjuyxy">返回个人主页</a>
                 </div>

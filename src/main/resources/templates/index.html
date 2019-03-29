@@ -67,7 +67,8 @@
                                     <a id="followers" target="_blank" href="#" class="zg-link-gray-normal"
                                        th:href="@{/user/{userId}/followers(userId=${thisUser.id})}" th:text="${followerCount + ' 粉丝'}">462 关注者</a>
                                     /
-                                    <a target="_blank" href="/people/buaabarty/asks" class="zg-link-gray-normal" th:text="${followeeCount + ' 关注的人'}">0 提问</a>
+                                    <a target="_blank" href="#" class="zg-link-gray-normal" th:text="${followeeCount + ' 关注的人'}"
+                                       th:href="@{/user/{userId}/followees(userId=${thisUser.id})}">0 提问</a>
                                     /
                                     <a target="_blank" href="#" class="zg-link-gray-normal" th:text="${askCount + ' 提问'}">0 提问</a>
                                     /

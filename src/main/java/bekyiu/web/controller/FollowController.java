@@ -45,7 +45,7 @@ public class FollowController
     @ResponseBody
     public String followUser(Long userId)
     {
-        if(hostHolder.getUser().getUsername() == null)
+        if (hostHolder.getUser().getUsername() == null)
         {
             return JsonUtil.getJsonString(1);
         }
@@ -65,7 +65,7 @@ public class FollowController
     @ResponseBody
     public String unfollowUser(Long userId)
     {
-        if(hostHolder.getUser().getUsername() == null)
+        if (hostHolder.getUser().getUsername() == null)
         {
             return JsonUtil.getJsonString(1);
         }
@@ -84,7 +84,7 @@ public class FollowController
     @ResponseBody
     public String followQuestion(Long questionId)
     {
-        if(hostHolder.getUser().getUsername() == null)
+        if (hostHolder.getUser().getUsername() == null)
         {
             return JsonUtil.getJsonString(1);
         }
@@ -104,7 +104,7 @@ public class FollowController
     @ResponseBody
     public String unfollowQuestion(Long questionId)
     {
-        if(hostHolder.getUser().getUsername() == null)
+        if (hostHolder.getUser().getUsername() == null)
         {
             return JsonUtil.getJsonString(1);
         }
@@ -140,7 +140,7 @@ public class FollowController
             //这个user一共收到过多少个赞
             vo.put("likeCount", likeService.getSelfLikeCount(follower.getId()));
             //如果来到的是自己的粉丝列表 就要看下自己是否关注了这些粉丝
-            if(userId.equals(hostHolder.getUser().getId()))
+            if (userId.equals(hostHolder.getUser().getId()))
             {
                 vo.put("isFollowedByMe", followService.isFollower(hostHolder.getUser().getId(), follower.getId(), EntityType.ENTITY_USER));
             }
@@ -149,10 +149,43 @@ public class FollowController
         model.addAttribute("vos", vos);
         model.addAttribute("curUser", userService.get(userId));
         model.addAttribute("followerCount", followersId.size());
-
+        //表示当前页面是粉丝列表
+        model.addAttribute("isFollower", true);
         return "followList";
     }
 
+    //跳转到这个userId关注的人的列表
+    @RequestMapping("/user/{userId}/followees")
+    public String followeeList(Model model, @PathVariable Long userId)
+    {
+        List<Integer> followeesId = followService.getFollowees(userId, EntityType.ENTITY_USER, 0L, -1L);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Integer id : followeesId)
+        {
+            ViewObject vo = new ViewObject();
+            User followee = userService.get((long) id);
+            vo.put("follower", followee);
+            vo.put("followerCount", followService.getFollowerCount(followee.getId(), EntityType.ENTITY_USER));
+            vo.put("followeeCount", followService.getFolloweeCount(followee.getId(), EntityType.ENTITY_USER));
+            vo.put("askCount", questionService.getQuestionByUserId(followee.getId()).size());
+
+            vo.put("commentNum", commentService.getCommentCountByUserId(followee.getId()));
+            //这个user一共收到过多少个赞
+            vo.put("likeCount", likeService.getSelfLikeCount(followee.getId()));
+            //如果来到的是自己的关注列表
+            if (userId.equals(hostHolder.getUser().getId()))
+            {
+                vo.put("isFollowedByMe", true);
+            }
+            vos.add(vo);
+        }
+        model.addAttribute("vos", vos);
+        model.addAttribute("curUser", userService.get(userId));
+        model.addAttribute("followerCount", followeesId.size());
+        //表示当前页面是关注列表
+        model.addAttribute("isFollower", false);
+        return "followList";
+    }
 
     //关注人/问题 后应该返回的信息
     private String getBackInfo(Long entityId, Integer entityType, Boolean ret)
@@ -160,7 +193,7 @@ public class FollowController
         Map<String, Object> json = new HashMap<>();
         json.put("code", ret ? 0 : 1);
         json.put("followerCount", followService.getFollowerCount(entityId, entityType));
-        if(entityType.equals(EntityType.ENTITY_QUESTION))
+        if (entityType.equals(EntityType.ENTITY_QUESTION))
         {
             json.put("me", hostHolder.getUser());
         }
