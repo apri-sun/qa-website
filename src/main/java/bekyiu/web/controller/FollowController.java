@@ -50,7 +50,7 @@ public class FollowController
                 .setEntityType(EntityType.ENTITY_USER));
 
         //
-        return getUserInfo(userId, EntityType.ENTITY_USER, ret);
+        return getBackInfo(userId, EntityType.ENTITY_USER, ret);
     }
 
     @RequestMapping("/unfollowUser")
@@ -69,60 +69,64 @@ public class FollowController
                 .setEntityId(userId)
                 .setEntityType(EntityType.ENTITY_USER));
         //
-        return getUserInfo(userId, EntityType.ENTITY_USER, ret);
+        return getBackInfo(userId, EntityType.ENTITY_USER, ret);
     }
 
     @RequestMapping("/followQuestion")
     @ResponseBody
     public String followQuestion(Long questionId)
     {
-//        if(hostHolder.getUser().getUsername() == null)
-//        {
-//            return JsonUtil.getJsonString(1);
-//        }
-//        Boolean ret = followService.follow(hostHolder.getUser().getId(), questionId, EntityType.ENTITY_QUESTION);
-//        eventProducer.fireEvent(new EventModel()
-//                .setType(EventType.FOLLOW_QUESTION)
-//                .setActorId(hostHolder.getUser().getId())
-//                .setEntityOwnerId(questionService.get(questionId).getUserId())
-//                .setEntityId(questionId)
-//                .setEntityType(EntityType.ENTITY_QUESTION)
-//                .setExts("questionId", String.valueOf(questionId)));
-//
-//        Map<String, Object> json = new HashMap<>();
-//        json.put("code", ret ? 0 : 1);
-//        json.put("followerCount", followService.getFollowerCount(questionId, EntityType.ENTITY_QUESTION));
-//        json.put("me", hostHolder.getUser());
-        Map<String, Object> json = new HashMap<>();
-        json.put("code", 0);
-        json.put("followerCount", 10);
-        json.put("me", hostHolder.getUser());
-        return JSON.toJSONString(json);
+        if(hostHolder.getUser().getUsername() == null)
+        {
+            return JsonUtil.getJsonString(1);
+        }
+        Boolean ret = followService.follow(hostHolder.getUser().getId(), questionId, EntityType.ENTITY_QUESTION);
+        eventProducer.fireEvent(new EventModel()
+                .setType(EventType.FOLLOW_QUESTION)
+                .setActorId(hostHolder.getUser().getId())
+                .setEntityOwnerId(questionService.get(questionId).getUserId())
+                .setEntityId(questionId)
+                .setEntityType(EntityType.ENTITY_QUESTION)
+                .setExts("questionId", String.valueOf(questionId)));
+
+        return getBackInfo(questionId, EntityType.ENTITY_QUESTION, ret);
     }
 
     @RequestMapping("/unfollowQuestion")
     @ResponseBody
     public String unfollowQuestion(Long questionId)
     {
-        Map<String, Object> json = new HashMap<>();
-        json.put("code", 0);
-        json.put("followerCount", 9);
-        json.put("me", hostHolder.getUser());
-        return JSON.toJSONString(json);
+        if(hostHolder.getUser().getUsername() == null)
+        {
+            return JsonUtil.getJsonString(1);
+        }
+
+        Boolean ret = followService.unfollow(hostHolder.getUser().getId(), questionId, EntityType.ENTITY_QUESTION);
+        eventProducer.fireEvent(new EventModel()
+                .setType(EventType.UNFOLLOW_QUESTION)
+                .setActorId(hostHolder.getUser().getId())
+                .setEntityOwnerId(questionService.get(questionId).getUserId())
+                .setEntityId(questionId)
+                .setEntityType(EntityType.ENTITY_QUESTION)
+                .setExts("questionId", String.valueOf(questionId)));
+
+        return getBackInfo(questionId, EntityType.ENTITY_QUESTION, ret);
     }
 
 
 
 
-    //关注人后应该返回的信息
-    private String getUserInfo(Long userId, Integer entityType, Boolean ret)
+    //关注人/问题 后应该返回的信息
+    private String getBackInfo(Long entityId, Integer entityType, Boolean ret)
     {
         Map<String, Object> json = new HashMap<>();
         json.put("code", ret ? 0 : 1);
-        json.put("followerCount", followService.getFollowerCount(userId, entityType));
+        json.put("followerCount", followService.getFollowerCount(entityId, entityType));
+        if(entityType.equals(EntityType.ENTITY_QUESTION))
+        {
+            json.put("me", hostHolder.getUser());
+        }
         return JSON.toJSONString(json);
     }
 
-    //关注问题后应该返回的信息
-//    private String getUserInfo()
 }

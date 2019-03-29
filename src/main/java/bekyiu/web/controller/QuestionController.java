@@ -1,13 +1,7 @@
 package bekyiu.web.controller;
 
-import bekyiu.domain.Comment;
-import bekyiu.domain.HostHolder;
-import bekyiu.domain.Question;
-import bekyiu.domain.ViewObject;
-import bekyiu.service.ICommentService;
-import bekyiu.service.ILikeService;
-import bekyiu.service.IQuestionService;
-import bekyiu.service.IUserService;
+import bekyiu.domain.*;
+import bekyiu.service.*;
 import bekyiu.util.EntityType;
 import bekyiu.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +29,8 @@ public class QuestionController
     private ICommentService commentService;
     @Autowired
     private ILikeService likeService;
+    @Autowired
+    private IFollowService followService;
 
     @RequestMapping("/question/add")
     @ResponseBody
@@ -83,6 +79,19 @@ public class QuestionController
             vos.add(vo);
         }
         model.addAttribute("vos", vos);
+        //对这个问题的所有followers
+        List<Integer> followersId = followService.getFollowers(questionId, EntityType.ENTITY_QUESTION, 0L, -1l);
+        List<User> followers = new ArrayList<>();
+        for (Integer id : followersId)
+        {
+            followers.add(userService.get((long)id));
+        }
+        model.addAttribute("followers", followers);
+        //几人关注该问题
+        model.addAttribute("followerCount", followService.getFollowerCount(questionId, EntityType.ENTITY_QUESTION));
+        //该问题是否被当前用户关注过
+        model.addAttribute("isFollowedByMe", followService.isFollower(hostHolder.getUser().getId(),
+                questionId, EntityType.ENTITY_QUESTION));
         return "detail";
     }
 

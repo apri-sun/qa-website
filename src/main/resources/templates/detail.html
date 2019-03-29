@@ -62,7 +62,10 @@
             </div>
             <div class="zm-side-section">
                 <div class="zm-side-section-inner" id="zh-question-side-header-wrap">
-                    <button id="followQuestion" data-follow="q:m:button" class="follow-button zg-btn-follow zg-btn-green" data-qid="66" th:data-qid="${question.id}">
+                    <button id="followQuestion" data-follow="q:m:button"
+                            class="follow-button zg-btn-green" data-qid="66"
+                            th:classappend="${isFollowedByMe} ? 'zg-btn-unfollow' : 'zg-btn-follow'"
+                            th:data-qid="${question.id}">
                         关注问题
                     </button>
                     <div class="zg-btn-white goog-inline-block goog-menu-button" id="zh-question-operation-menu"
@@ -89,30 +92,17 @@
                     <div class="zh-question-followers-sidebar">
                         <div class="zg-gray-normal">
                             <a href="">
-                                <strong id="followerCount">9</strong>
+                                <strong id="followerCount" th:text="${followerCount}">9</strong>
                             </a>人关注该问题
                         </div>
                         <div class="list zu-small-avatar-list zg-clear">
-
-                            <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href=""
-                               data-original_title="奕奕">
-                                <img src="../static/images/res/6ceea810748d179f57cac0baa5cf9592_s.jpg"
+                            <a data-uid="" th:data-uid="${fan.id}" class="zm-item-link-avatar" href=""
+                               data-original_title="zz" th:data-original_title="${fan.username}"
+                               th:href="@{/user/{userId}(userId=${fan.id})}"
+                               th:each="fan : ${followers}">
+                                <img src="#" th:src="${fan.headUrl}"
                                      class="zm-item-img-avatar">
                             </a>
-                            <a data-tip="p$b$wang-wu-29-54" class="zm-item-link-avatar" href=""
-                               data-original_title="王五">
-                                <img src="../static/images/res/da8e974dc_s.jpg" class="zm-item-img-avatar">
-                            </a>
-                            <a data-tip="p$b$huang-xiang-90-99" class="zm-item-link-avatar" href=""
-                               data-original_title="案小声">
-                                <img src="../static/images/res/19456ebfe8b207320735f282769ac635_s.jpg"
-                                     class="zm-item-img-avatar">
-                            </a>
-                            <a data-tip="p$b$yingxiaodao" class="zm-item-link-avatar" href="" data-original_title="营销岛">
-                                <img src="../static/images/res/11be4a90ed938abfbab4899df56ee754_s.png"
-                                     class="zm-item-img-avatar">
-                            </a>
-
                         </div>
                     </div>
                 </div>
