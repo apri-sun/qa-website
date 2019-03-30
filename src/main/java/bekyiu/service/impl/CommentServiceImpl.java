@@ -41,7 +41,7 @@ public class CommentServiceImpl implements ICommentService
 
     private void filterText(Comment comment)
     {
-        comment.setContent(HtmlUtils.htmlEscape(comment.getContent()));
+//        comment.setContent(HtmlUtils.htmlEscape(comment.getContent()));
         comment.setContent(sensitiveWordsService.filter(comment.getContent()));
     }
 
