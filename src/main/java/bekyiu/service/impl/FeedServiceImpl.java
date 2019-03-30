@@ -49,6 +49,6 @@ public class FeedServiceImpl implements IFeedService
     @Override
     public List<Feed> selectUserFeeds(Long maxId, List<Long> userIds, Integer count)
     {
-        return selectUserFeeds(maxId, userIds, count);
+        return feedMapper.selectUserFeeds(maxId, userIds, count);
     }
 }
