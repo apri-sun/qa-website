@@ -1,5 +1,7 @@
 package bekyiu.domain;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,4 +25,16 @@ public class Feed
 
     //新鲜事的具体内容 是一个json串
     private String data;
+    private JSONObject dataJson;
+
+    public void setData(String data)
+    {
+        this.data = data;
+        dataJson = JSONObject.parseObject(data);
+    }
+    //根据key拿到json中对应的value
+    public Object get(String key)
+    {
+        return dataJson == null ? null : dataJson.get(key);
+    }
 }

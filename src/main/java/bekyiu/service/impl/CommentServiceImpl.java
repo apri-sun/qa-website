@@ -94,4 +94,12 @@ public class CommentServiceImpl implements ICommentService
         }
         return count;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Comment getByUserIdAndEntityId(Long userId, Long entityId)
+    {
+        List<Comment> comments = commentMapper.getByUserIdAndEntityId(userId, entityId);
+        return comments.size() == 0 ? null : comments.get(0);
+    }
 }

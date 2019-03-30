@@ -1,0 +1,72 @@
+<!--迭代每一个问题-->
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="feed-item folding feed-item-hook feed-item-2
+                        " feed-item-a="" data-type="a" id="feed-2"
+     data-za-module="FeedItem" data-za-index="" th:if="${feed.type == 1}"
+     th:each="feed : ${feeds}" th:fragment="commentQuestion">
+
+    <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
+    <div class="feed-item-inner">
+        <div class="avatar">
+            <a title="李淼" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank"
+               href="https://nowcoder.com/people/amuro1230">
+
+                <img src="../static/images/res/default_head.jpg" th:src="${feed.get('actorUser').headUrl}"
+                     class="zm-item-img-avatar">
+            </a>
+        </div>
+
+        <div class="feed-main">
+            <span style="display: inline-block;"></span>
+            <div class="feed-content" data-za-module="AnswerItem">
+                <meta itemprop="answer-id" content="389034">
+                <meta itemprop="answer-url-token" content="13174385">
+                <h3 class="feed-title">
+                    <!--th:href="@{/question/{questionId}(questionId = ${vo.get('question').id})}" th:utext="${vo.get('question').title}"-->
+                    <!--<a class="question_link" target="_blank" href="#" >在正式场合穿着正装如何避免被当做服务员？</a>-->
+                    <span th:text="${feed.get('actorUser').username}">xxx</span>评论了该问题:
+                    <a class="question_link" target="_blank" href="#"
+                       th:href="@{/question/{questionId}(questionId = ${feed.get('cofQuestion').id})}"
+                       th:text="${feed.get('cofQuestion').title}">url
+                    </a>
+                </h3>
+                <div class="expandable entry-body">
+                    <!--<div class="zm-item-vote">-->
+                        <!--<a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>-->
+                    <div class="zm-item-answer-author-info">
+                        <!--th:href="@{/user/{id}(id=${vo.get('user').id})}" th:text="${vo.get('user').username}"-->
+                        <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="#"
+                            th:href="@{/user/{id}(id = ${feed.get('actorUser').id})}" th:text="${feed.get('actorUser').username}">李淼</a>
+                        <!--th:text="${#dates.format(vo.get('question').createDate, 'yyyy-MM-dd HH:mm:ss')}"-->
+                        <span title="time" class="bio"
+                              th:text="${#dates.format(feed.createdDate, 'yyyy-MM-dd HH:mm:ss')}">，time…</span>
+                    </div>
+
+                    <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
+                        <textarea hidden="" class="content">怕被当作服务员，可以穿White tie full dress（一般二般的服务员没那么讲究）jpg"&gt;</textarea>
+                        <!--th:utext="${vo.get('question').content}"-->
+                        <div class="zh-summary summary clearfix" th:text="${feed.get('comment').content}">
+                            怕被当作服务员，和领班…
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-meta">
+                    <div class="zm-item-meta answer-actions clearfix js-contentActions">
+                        <div class="zm-meta-panel">
+                            <a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-123114">
+                                <i class="z-icon-follow"></i>关注问题
+                            </a>
+                            <!--th:utext="'<i class=&quot;z-icon-comment&quot;></i>' + ${vo.get('question').commentCount} + '条评论'-->
+                            <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox"
+                               th:utext="'<i class=&quot;z-icon-comment&quot;></i>' + ${feed.get('cofQuestion').commentCount}">
+                                <i class="z-icon-comment"></i>69 条评论
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

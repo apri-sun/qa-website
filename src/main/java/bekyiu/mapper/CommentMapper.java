@@ -25,4 +25,13 @@ public interface CommentMapper
     Integer getCommentCount(@Param("entityType") Integer entityType, @Param("entityId") Long entityId);
 
     List<Comment> getByUserId(Long userId);
+
+    /**
+     * 查询出这个userId代表的用户 在entityId表示的问题下的所有回答(entityType默认是question)
+     * 按时间先后排序
+     * @param userId
+     * @param entityId
+     * @return
+     */
+    List<Comment> getByUserIdAndEntityId(@Param("userId") Long userId, @Param("entityId") Long entityId);
 }

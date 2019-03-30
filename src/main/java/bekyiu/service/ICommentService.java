@@ -26,4 +26,13 @@ public interface ICommentService
 
     //查询这个用户回答问题的总数量
     Integer getCommentCountByUserId(Long userId);
+
+    /**
+     * 查询出这个userId代表的用户 在entityId表示的问题下的所有回答(entityType默认是question)
+     * 中时间最新的那一个
+     * @param userId
+     * @param entityId
+     * @return
+     */
+    Comment getByUserIdAndEntityId(Long userId, Long entityId);
 }

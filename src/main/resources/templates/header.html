@@ -15,7 +15,12 @@
             </a>
             <ul class="top-nav-dropdown" id="top-nav-profile-dropdown" aria-labelledby=":0">
                 <li>
-                    <a th:href="@{/user/{userId}(userId = ${user.id} == null ? '0' : ${user.id})}" href="https://nowcoder.com/people/hu-yuan-24-48" tabindex="-1" id=":1">
+                    <a th:if="${user.id != null}" th:href="@{/user/{userId}(userId = ${user.id})}"
+                        href="#" tabindex="-1" id=":1">
+                        <i class="zg-icon zg-icon-dd-home"></i>我的主页
+                    </a>
+                    <a th:if="${user.id == null}" th:href="@{/loginToHtml}"
+                       href="#" tabindex="-1" id=":1">
                         <i class="zg-icon zg-icon-dd-home"></i>我的主页
                     </a>
                 </li>

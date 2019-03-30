@@ -6,6 +6,7 @@ import bekyiu.async.EventType;
 import bekyiu.domain.Feed;
 import bekyiu.domain.Question;
 import bekyiu.domain.User;
+import bekyiu.service.ICommentService;
 import bekyiu.service.IFeedService;
 import bekyiu.service.IQuestionService;
 import bekyiu.service.IUserService;
@@ -25,6 +26,8 @@ public class FeedHandler implements EventHandler
     private IUserService userService;
     @Autowired
     private IQuestionService questionService;
+    @Autowired
+    private ICommentService commentService;
 
     private String buildFeedData(EventModel eventModel)
     {
@@ -47,6 +50,9 @@ public class FeedHandler implements EventHandler
             }
             //comment or follow question
             json.put("cofQuestion", question);
+            //如果是评论, 就把这条评论查出来
+            json.put("comment", commentService.getByUserIdAndEntityId(actor.getId(), question.getId()));
+            System.out.println(json.get("comment"));
             return JSON.toJSONString(json);
         }
         return null;
