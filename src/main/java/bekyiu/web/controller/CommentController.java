@@ -6,7 +6,6 @@ import bekyiu.async.EventType;
 import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.Question;
-import bekyiu.domain.User;
 import bekyiu.service.ICommentService;
 import bekyiu.service.IQuestionService;
 import bekyiu.util.EntityType;
