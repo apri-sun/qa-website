@@ -41,7 +41,7 @@
 
 
         <!-- ============================================================================== -->
-        <table tableName="message" delimitIdentifiers="true">
+        <table tableName="feed" delimitIdentifiers="true">
             <!--false使用驼峰表示-->
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="JDBC"/>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bekyiu.mapper.FeedMapper">
+    <resultMap id="BaseResultMap" type="bekyiu.domain.Feed">
+        <id column="id" property="id"/>
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate"/>
+        <result column="user_id" property="userId"/>
+        <result column="type" property="type"/>
+        <result column="data" property="data"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `feed` where id = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="bekyiu.domain.Feed" useGeneratedKeys="true">
+        insert into `feed` (created_date, user_id, type, data)
+        values (#{createdDate}, #{userId}, #{type}, #{data})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="bekyiu.domain.Feed">
+        update `feed`
+        set created_date = #{createdDate},
+          user_id = #{userId},
+          type = #{type},
+          data = #{data}
+        where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, created_date, user_id, type, data
+        from `feed`
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, created_date, user_id, type, data
+        from `feed`
+    </select>
+    <select id="selectUserFeeds" resultMap="BaseResultMap">
+        SELECT * FROM feed
+        <where>
+            AND id &lt; #{maxId}
+            <if test="userIds != null and userIds.size() != 0">
+                AND user_id IN
+                <foreach collection="userIds" item="id" separator="," close=")" open="(">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY created_date DESC
+        LIMIT #{count}
+    </select>
+</mapper>
