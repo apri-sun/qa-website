@@ -35,7 +35,7 @@ public class FeedController
             followeesId = followService.getFollowees(localUserId, EntityType.ENTITY_USER, 0L, Long.MAX_VALUE);
         }
         //没有登录的话就是查询所有人的新鲜事
-        List<Feed> feeds = feedService.selectUserFeeds(Long.MAX_VALUE, ints2Longs(followeesId), 10);
+        List<Feed> feeds = feedService.selectUserFeeds(Long.MAX_VALUE, ints2Longs(followeesId), 20);
         model.addAttribute("feeds", feeds);
         return "feeds";
     }
