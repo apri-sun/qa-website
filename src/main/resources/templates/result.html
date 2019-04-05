@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN"
+      class="is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" async="" src="../images/res/za-0.1.1.min.js"></script>
+    <script async="" src="/images/res/ga.js"></script>
+    <title>qiche - 搜索结果 - 牛客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="/styles/result.css"/>
+    <script src="/images/res/instant.e7a17de6.js"></script>
+    <style type="text/css">._colors_text-muted_5fu- {
+        color: #999
+    }</style>
+
+</head>
+<body class="zhi page-search">
+<!--头-->
+<div th:replace="header :: head1"></div>
+<div th:replace="header :: head2"></div>
+<div class="zg-wrap zu-main clearfix" role="main">
+    <div class="zu-main-content">
+        <div class="zu-main-content-inner">
+            <ul class="list contents navigable"
+                data-paging="{&quot;next&quot;: &quot;/r/search?q=qiche&amp;type=content&amp;offset=10&quot;}"
+                data-navigable="{&quot;items&quot;: &quot;&gt;.item .answer-item, &gt;.item.article-item&quot;}">
+                <li class="item clearfix" th:each="vo : ${vos}">
+                    <div class="title">
+                        <a target="_blank" href="#" th:href="@{/question/{qid}(qid=${vo.get('question').id})}"
+                           class="js-title-link" th:utext="${vo.get('question').title}"><em>汽车</em>有哪些冷知识？</a>
+                    </div>
+                    <div class="content">
+                        <meta itemprop="question-id" content="9102803"/>
+                        <meta itemprop="question-url-token" content="42237413"/>
+                        <ul class="answers">
+                            <li class="answer-item clearfix" data-za-module="AnswerItem">
+                                <div class="entry answer">
+                                    <link itemprop="url"
+                                          href="https://www.nowcoder.com/question/42237413/answer/108137941"/>
+                                    <meta itemprop="answer-id" content="38723370"/>
+                                    <meta itemprop="answer-url-token" content="108137941"/>
+                                    <div class="entry-left hidden-phone">
+                                        <a class="zm-item-vote-count hidden-expanded js-expand js-vote-count"
+                                           data-bind-votecount="">1573</a>
+                                        <div class="zm-votebar visible-expanded goog-scrollfloater"
+                                             data-za-module="VoteBar">
+                                            <button class="up" title="赞同" aria-pressed="false"><i
+                                                    class="icon vote-arrow"></i><span
+                                                    class="label sr-only">赞同</span><span class="count">1573</span>
+                                            </button>
+                                            <button class="down" title="反对，不会显示你的姓名" aria-pressed="false"><i
+                                                    class="icon vote-arrow"></i><span
+                                                    class="label sr-only">反对，不会显示你的姓名</span></button>
+                                        </div>
+                                    </div>
+                                    <div class="entry-body">
+                                        <div class="entry-meta">
+                                            <strong class="author-line">
+                                                <a class="author"
+                                                   href="#" th:href="@{/user/{id}(id=${vo.get('askUser').id})}"
+                                                   data-tip="p$t$deng-fan-94" th:utext="${vo.get('askUser').username}">noble6
+                                                </a>
+                                            </strong>
+                                        </div>
+                                        <div class="entry-content js-collapse-body" data-author-name="noble6"
+                                             data-entry-url="/question/42237413/answer/108137941">
+                                            <div class="summary hidden-expanded" style="" th:utext="${vo.get('question').content}">
+                                                法需要开转向灯.5、没有红绿灯的十字路口遵循让右…
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="actions clearfix js-contentActions">
+                                            <span class="hidden-tablet hidden-desktop"><a
+                                                    href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                                    class="action-item votenum-mobile zm-item-vote-count js-openVoteDialog"><span
+                                                    data-bind-votecount="">1573</span><i class="zg-icon arrow"></i></a></span>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item zg-follow" data-follow="q:link" data-id="9102803"><i
+                                                class="z-icon-follow"></i>关注问题</a>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item js-toggleCommentBox"><i
+                                                class="z-icon-comment"></i><span class="label">360 条评论</span></a>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item visible-focusin js-thank  hidden-phone"><i
+                                                class="z-icon-thank"></i>感谢</a>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item visible-focusin js-share hidden-phone goog-inline-block goog-menu-button"
+                                           role="button" aria-expanded="false" tabindex="0" aria-haspopup="true"
+                                           style="-webkit-user-select: none;">
+                                            <div class="goog-inline-block goog-menu-button-outer-box">
+                                                <div class="goog-inline-block goog-menu-button-inner-box">
+                                                    <div class="goog-inline-block goog-menu-button-caption">
+                                                        <i class="z-icon-share"></i>分享
+                                                    </div>
+                                                    <div class="goog-inline-block goog-menu-button-dropdown">
+                                                        &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item visible-focusin js-collect hidden-phone"><i
+                                                class="z-icon-collect"></i>收藏</a>
+                                        <span class="bull visible-focusin hidden-phone">•</span>
+                                        <a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                           class="action-item visible-focusin js-report hidden-phone">举报</a>
+                                        <span class="bull hidden-phone">•</span>
+                                        <a href="https://www.nowcoder.com/terms#sec-licence-1" target="_blank"
+                                           class="action-item js-copyright hidden-phone">作者保留权利</a>
+                                        <span class="hidden-tablet hidden-desktop phone-actions"><a
+                                                href="https://www.nowcoder.com/search?type=content&amp;q=qiche#"
+                                                class="button-text menubutton goog-inline-block goog-menu-button"
+                                                role="button" aria-expanded="false" tabindex="0"
+                                                aria-haspopup="true" style="-webkit-user-select: none;">
+               <div class="goog-inline-block goog-menu-button-outer-box">
+                <div class="goog-inline-block goog-menu-button-inner-box">
+                 <div class="goog-inline-block goog-menu-button-caption">
+                  <i class="zg-icon zg-icon-ellipsis-mobi"></i>
+                  <span class="hide-text">更多</span>
+                 </div>
+                 <div class="goog-inline-block goog-menu-button-dropdown">
+                  &nbsp;
+                 </div>
+                </div>
+               </div></a>
+              <div class="menu goog-menu goog-menu-vertical zh-answer-more-actions"
+                   style="display: none; -webkit-user-select: none;" role="menu" aria-haspopup="true">
+               <div class="goog-menuitem js-share" role="menuitem" id=":m" style="-webkit-user-select: none;">
+                <div class="goog-menuitem-content" style="-webkit-user-select: none;">
+                 分享
+                </div>
+               </div>
+               <div class="goog-menuseparator" aria-disabled="true" role="separator" id=":n"
+                    style="-webkit-user-select: none;"></div>
+               <div class="goog-menuitem js-collect" role="menuitem" id=":o" style="-webkit-user-select: none;">
+                <div class="goog-menuitem-content" style="-webkit-user-select: none;">
+                 收藏
+                </div>
+               </div>
+               <div class="goog-menuseparator" aria-disabled="true" role="separator" id=":p"
+                    style="-webkit-user-select: none;"></div>
+               <div class="goog-menuitem js-thank " role="menuitem" id=":q" style="-webkit-user-select: none;">
+                <div class="goog-menuitem-content" style="-webkit-user-select: none;">
+                 感谢
+                </div>
+               </div>
+               <div class="goog-menuseparator" aria-disabled="true" role="separator" id=":r"
+                    style="-webkit-user-select: none;"></div>
+               <div class="goog-menuitem js-report" role="menuitem" id=":s" style="-webkit-user-select: none;">
+                <div class="goog-menuitem-content" style="-webkit-user-select: none;">
+                 举报
+                </div>
+               </div>
+              </div>
+                                            </span>
+                                        <span class="bull hidden-tablet hidden-desktop">•</span>
+                                        <a href="https://www.nowcoder.com/terms#sec-licence-1" target="_blank"
+                                           class="action-item js-copyright hidden-tablet hidden-desktop">作者保留权利</a>
+                                        <button class="action-item item-collapse js-collapse"><i
+                                                class="z-icon-fold"></i>收起
+                                        </button>
+                                    </div>
+                                </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </li>
+
+        </ul>
+    </div>
+</div>
+</div>
+<script type="text/json" class="json-inline" data-name="guiders2">{"exclusive-popover":{},"section":{},"editor":[]}
+
+
+
+
+</script>
+<script type="text/json" class="json-inline" data-name="current_user">
+    ["\u80e1\u539f","hu-yuan-24-48","https:\/\/pic1.zhimg.com\/0c6a39621ab1d456b1e6e492d0becc0c_s.jpg","69e344deb3bd4d35db07194565261bbe","",0,0,true,"422018883@qq.com","http:\/\/mail.qq.com",0,true,false,false,"734705672150609920",false]
+
+
+
+
+</script>
+</body>
+</html>
+<script type="text/json" class="json-inline" data-name="user_status">[null,null]</script>
+<script type="text/json" class="json-inline" data-name="env">["nowcoder.com","comet.nowcoder.com",false,null,false]
+
+
+
+
+</script>
+<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+<script type="text/json" class="json-inline" data-name="ga_vars">
+    {"user_created":1467947482000,"now":1467991904000,"abtest_mask":"---------1--------------------","user_attr":[1,0,0,"-","-"],"user_hash":"69e344deb3bd4d35db07194565261bbe"}
+
+
+
+
+</script>
+
+<script type="text/json" class="json-inline" data-name="ra-urls">
+    {"Report":"https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/Report.de4e9d17.js","Community":"https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/Community.4e11c449.js","OrgAnalytics":"https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/OrgAnalytics.47e1a483.js","common":"https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/common.ed1d17c3.js","CommentApp":"https:\/\/static.nowcoder.com\/static\/revved\/-\/apps\/CommentApp.2ab02258.js"}
+
+
+
+
+</script>
+<div id="zh-footer" class="zh-footer">
+    <div class="content zg-wrap clearfix">
+        <ul>
+            <li><a href="https://liukanshan.nowcoder.com/" target="_blank">刘看山</a></li>
+            <li><a href="https://www.nowcoder.com/question/19581624" target="_blank">牛客指南</a></li>
+            <li><a href="https://www.nowcoder.com/search?type=content&amp;q=qiche#" id="js-feedback-button">建议反馈</a>
+            </li>
+            <li><a href="https://www.nowcoder.com/app" target="_blank">移动应用</a></li>
+            <li><a href="https://www.nowcoder.com/careers">加入牛客</a></li>
+            <li><a href="https://www.nowcoder.com/terms" target="_blank">牛客协议</a></li>
+            <li><a href="https://www.nowcoder.com/contact">联系我们</a></li>
+        </ul>
+        <span class="copy">© 2016 牛客</span></div>
+</div>
+<script type="text/json" class="json-inline" data-name="searchKeyword">"qiche"</script>
+<script src="../images/res/vendor.ff76fbae.js"></script>
+<script src="../images/res/base.618fdc41.js"></script>
+
+<script src="../images/res/common.e69719af.js"></script>
+
+
+<script src="../images/res/richtexteditor.06781843.js" async=""></script>
+<script src="../images/res/page-main.ee505e21.js"></script>
+<meta name="entry" content="ZH.entrySearch" data-module-id="page-main">
+<div class="zh-backtotop" style="opacity: 0; display: none;"><a data-action="backtotop" data-tip="s$r$回到顶部"
+                                                                href="javascript:;" class="btn-backtotop btn-action">
+    <div class="arrow"></div>
+    <div class="stick"></div>
+</a></div>
+<div id="zh-tooltip"></div>
+<div class="copyright-notification">
+    <div class="user-image-container"><img class="user-image"
+                                           src="https://www.nowcoder.com/search?type=content&amp;q=qiche"></div>
+    <div class="tooltip right noty-tooltip">
+        <div class="tooltip-arrow arrow"></div>
+        <div class="tooltip-inner inner"> 如需转载，请通过私信或评论联系我</div>
+    </div>
+</div>
+</body>
+</html>
