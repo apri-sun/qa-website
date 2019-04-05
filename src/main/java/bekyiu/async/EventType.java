@@ -5,7 +5,7 @@ import lombok.Getter;
 public enum EventType
 {
     LIKE(0), COMMENT(1), LOGIN(2), MAIL(3), FOLLOW(4), UNFOLLOW(5),
-    FOLLOW_QUESTION(6), UNFOLLOW_QUESTION(7);
+    FOLLOW_QUESTION(6), UNFOLLOW_QUESTION(7), ADD_QUESTION(8);
 
     @Getter
     private Integer value;

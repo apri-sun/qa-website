@@ -1,5 +1,8 @@
 package bekyiu.web.controller;
 
+import bekyiu.async.EventModel;
+import bekyiu.async.EventProducer;
+import bekyiu.async.EventType;
 import bekyiu.domain.*;
 import bekyiu.service.*;
 import bekyiu.util.EntityType;
@@ -31,6 +34,8 @@ public class QuestionController
     private ILikeService likeService;
     @Autowired
     private IFollowService followService;
+    @Autowired
+    private EventProducer eventProducer;
 
     @RequestMapping("/question/add")
     @ResponseBody
@@ -50,6 +55,13 @@ public class QuestionController
             question.setUserId(hostHolder.getUser().getId());
         }
         questionService.save(question);
+        eventProducer.fireEvent(new EventModel()
+                .setType(EventType.ADD_QUESTION)
+                .setActorId(question.getUserId())
+                .setEntityType(EntityType.ENTITY_QUESTION)
+                .setEntityId(question.getId())
+                .setExts("title", question.getTitle())
+                .setExts("content", question.getContent()));
         return JsonUtil.getJsonString(0);
     }
 
