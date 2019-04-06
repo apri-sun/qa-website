@@ -1,6 +1,5 @@
 package bekyiu.web.controller;
 
-import bekyiu.domain.Comment;
 import bekyiu.domain.HostHolder;
 import bekyiu.domain.Question;
 import bekyiu.domain.ViewObject;
@@ -34,7 +33,7 @@ public class HomeController
     @RequestMapping({"/", "/index"})
     public String index(Model model)
     {
-        List<Question> questions = questionService.getLatestQuestions(0, 0, 10);
+        List<Question> questions = questionService.getLatestQuestions(0, 0, 50);
         List<ViewObject> vos = new ArrayList<>();
         for (Question question : questions)
         {
