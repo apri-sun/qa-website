@@ -1,0 +1,456 @@
+a{
+	text-decoration: none;
+}
+
+/*隐藏的点赞栏*/
+.like-button-hide{
+	position: absolute;
+	display: none;
+	top: 60px;
+}
+
+/*对隐藏的返回顶部栏进行设置*/
+.to-top{
+	display: none;
+	position: fixed;
+	right: 6%;
+	bottom: 10%;
+}
+
+.to-top button{
+	border-radius: 3px;
+	border: none;
+	outline: #fff;
+	cursor: pointer;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+}
+
+.to-top img{
+	width: 38px;
+	height: 38px;
+}
+
+/*对隐藏的收起栏进行设置*/
+.pack-up{
+	display: inline;
+}
+
+.pack-up button{
+	border: none;
+	height: 23px;
+	width: 51px;
+	background-color: #0084ff;
+	color: #FFFFFF;
+	border-radius: 3px;
+	position: relative;
+	left: 620px;
+}
+
+
+/*对主页面进行设置*/
+.main-body{
+	width: 1000px;
+	height: auto;
+	margin: 70px auto;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0 1px 3px rgba(26,26,26,.1); 
+}
+
+.main-container{
+	width: 960px;
+}
+
+.main-container-right{
+	margin-top: 15px;
+	margin-left: 48px;
+	width: 912px;
+}
+
+.lables{
+	margin-bottom: 10px;
+}
+
+.lables a{
+	background-color: #e5f2ff;
+	font-size: 13px;
+	padding: 3px 10px 3px 10px;
+	color: #0084ff;
+	border-radius: 15px;
+}
+
+.lables a:hover{
+	background-color: rgb(217,237,255);
+}
+
+/*修改按钮样式*/
+label{
+	display: inline-flex;
+	align-items: center;
+	margin-left: 10px;
+	font-size: 11px;
+	color: #999;
+}
+
+label:hover{
+	background-color: #eff6fa;
+}
+
+label img{
+	height: 12px;
+	width: 12px;
+}
+
+.main-question{
+	margin-bottom: 10px;
+}
+
+h2{
+	display: inline;
+	font-weight: 700;
+	font-size: 18px;
+}
+
+.minor-question{
+	font-size: 13px;
+	color: #222;
+}
+
+/*关注问提人数*/
+.watch-list{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	height: 110px;
+	border-bottom: 1px solid #eee;
+}
+
+.watch-list .setAndfocus{
+	display: flex;
+	align-items: center;
+	position: absolute;
+}
+
+.watch-list .setAndfocus button{
+	width: 80px;
+	height: 34px;
+	background: #0084ff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	outline: #fff;
+	cursor: pointer;
+}
+
+.setting{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 20px;
+	height: 34px;
+	width: 34px;
+	background: linear-gradient(to bottom,#f8f8f9,#e6e6e8);
+	border: 1px solid #bbb;
+	border-radius: 3px;
+}
+
+.setting:active{
+	background: #ddd;
+}
+
+.setting img{
+	height: 20px;
+	width: 20px;
+}
+
+/*主页面中隐藏的菜单栏*/
+.watch-list .setAndfocus .list{
+	position: absolute;
+	top: 40px;
+	left: 100px;
+	display: none;
+	border: solid 1px #ccc;
+	border-radius: 3px;
+}
+
+#anonymity{
+	position: static;
+	border-bottom: 1px solid #ededed;
+	font-size: 13px;
+	color: #999;
+	height: 39.5px;
+	width: 110px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+
+#anonymity:hover{
+	background-color: #f5f5f5;
+}
+
+#redirect{
+	position: static;
+	font-size: 13px;
+	color: #999;
+	height: 39.5px;
+	width: 110px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+
+#redirect:hover{
+	background-color: #f5f5f5;
+}
+
+/*关注人数*/
+.focuserList{
+	padding-top: 50px;
+}
+
+.focusNumber{
+	font-weight: 400;
+	font-size: 13px;
+	color: #999;
+}
+
+.focusNumber a{
+	color: #0084ff;
+}
+
+/*关注者*/
+.listPicture{
+	margin-top: 10px;
+}
+
+.listPicture a img{
+	cursor: pointer;
+	height: 25px;
+	width: 25px;
+}
+
+/*文章内容主要部分  头部*/
+.main-text-head{
+	height: 45px;
+}
+
+.author-info a{
+	color: inherit;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.author-info{
+	position: absolute;
+	font-size: 13px;
+	width: 912px;
+}
+
+#author-picture{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#author-picture img{
+	cursor: pointer;
+	height: 25px;
+	width: 25px;
+}
+
+.like-number{
+	padding-top: 20px;
+}
+
+.like-number a{
+	font-size: 12px;
+	color: #999;
+}
+
+.like-number a:hover{
+	color: #25BB9B;
+}
+
+/*侧边的点赞按钮进行设置*/
+.like-button{
+	position: relative;
+	bottom: 45px;
+	right: 50px;
+	width: 38px;
+	height: 73px;
+}
+
+#up{
+	display: block;
+	border-radius: 3px;
+	background-color: #e5f2ff;
+	color: #0084ff;
+	outline: #fff;
+	border: none;
+	cursor: pointer;
+	height: 44px;
+	width: 38px;
+	
+}
+
+#up:hover{
+	background-color: #0084ff;
+	color: #fff;
+}
+
+#down{
+	border-radius: 3px;
+	background-color: #e5f2ff;
+	color: #0084ff;
+	outline: #fff;
+	border: none;
+	cursor: pointer;
+	height: 24px;
+	width: 38px;
+	margin-top: 5px;
+}
+
+#down:hover{
+	background-color: #0084ff;
+	color: #fff;
+}
+
+/*文章内容主要部分*/
+.main-text-body-container p{
+	font-size: 13px;
+	line-height: 1.7;
+	color: #222222;
+	margin: 0;
+}
+
+.main-text-body-foot{
+	margin-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #999;
+}
+
+.main-text-body-foot a{
+	color: #999;
+	font-size: 13px;
+}
+
+.main-text-body-foot .ddd{
+	margin-left: 15px;
+}
+
+.main-text-body-foot a img{
+	height: 10px;
+	width: 10px;
+}
+
+/*富文本编辑器区域 信息*/
+.editer-area{
+	margin-top: 25px;
+	padding-bottom: 40px;
+}
+
+.editer-area-head{
+	margin-bottom: 10px;
+}
+
+.editer-area-head a{
+	color: #0084ff;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.editer-area-head a img{
+	position: relative;
+	top: 8px;
+	left: 687px;
+	height: 25px;
+	width: 25px;
+}
+
+/*富文本编辑器 头部*/
+.editer{
+	width: 912px;
+	height: 220px;
+	border-radius: 5px;
+	border: 1.5px solid #ccc;
+	box-shadow:0px 0px 1px #ccc;
+	margin-bottom: 10px;
+}
+
+.editer-head{
+	display: flex;
+	align-items: center;
+	background: #f1f1f1;
+	width: 909px;
+	height: 37px;
+	border-bottom: 1.5px solid #ccc;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.editer-head div{
+	margin: 0px 1px 0px 1px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	height: 28px;
+	width: 28px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
+.editer-head div:hover{
+	border: 1px solid #c1c1c1;
+}
+
+.editer-head img{
+	width: 20px;
+	height: 20px;
+}
+
+/*富文本编辑器 身体*/
+#editer-body{
+	height: 165px;
+	width: 892px;
+	border: none;
+	padding: 10px;
+}
+
+/*富文本编辑器底部信息*/
+.editer-area-foot span{
+	display: inline-flex;
+	align-items: center;
+	font-size: 12px;
+}
+
+.editer-area-foot span input{
+	margin: 0px 5px 0px 0px;
+}
+
+.editer-area-foot span img{
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.editer-area-foot span button{
+	width: 78px;
+	height: 34px;
+	background: #0084ff;
+	border: none;
+	border-radius: 3px;
+	outline: #fff;
+	cursor: pointer;
+	position: relative;
+	left: 590px;
+	color: #fff;
+}

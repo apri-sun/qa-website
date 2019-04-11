@@ -1,0 +1,650 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: '微软雅黑';
+	font-size: 13px;
+	line-height: 1.7;
+	word-wrap: break-word;
+	color: #222;
+	background-color: #f6f6f6;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight: 700;
+	font-size: 14px;
+	outline: 0;
+}
+
+.index-header {
+	width: 100%;
+	height: 45px;
+	background-color: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+	z-index: 9999;
+}
+
+.index-wrap {
+	width: 951.5px;
+	height: 45px;
+	margin: 0 auto;
+}
+
+.index-logo {
+	width: 113px;
+	height: 36px;
+	float: left;
+	background-image: url(../images/er.png);
+	background-repeat: no-repeat;
+	margin-top: 5px;
+}
+
+.index-search {
+	position: relative;
+	float: left;
+	margin: 7px 0 0 12px;
+}
+
+.search-form {
+	position: relative;
+	width: 367px;
+}
+
+.search-box:focus {
+	padding: 7px 50px 7px 10px;
+	width: 100%;
+	font-size: 14px;
+	line-height: 17px;
+	background-color: white;
+	border: 1px solid #8590a6;
+	border-radius: 4px;
+	box-sizing: border-box;
+	outline: 0;
+	transition: all .2s ease-in-out;
+}
+
+.search-box {
+	padding: 7px 50px 7px 10px;
+	width: 100%;
+	font-size: 14px;
+	line-height: 17px;
+	background-color: #f6f6f6;
+	border: 1px solid #ebebeb;
+	border-radius: 4px;
+	box-sizing: border-box;
+	outline: 0;
+	transition: all .2s ease-in-out;
+}
+
+.search-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 100%;
+	background: transparent;
+	border: transparent;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	box-sizing: border-box;
+	outline: 0;
+	cursor: pointer;
+}
+
+.search-img {
+	background-image: url(../images/放大镜.png);
+	width: 17px;
+	height: 17px;
+	display: inline-block;
+	vertical-align: middle;
+	background-repeat: no-repeat;
+}
+
+.index-nav {
+	float: left;
+	position: relative;
+}
+
+.index-nav ul {
+	margin: 0 0 0 18px;
+	list-style-type: none;
+}
+
+.nav-li {
+	position: relative;
+	float: left;
+	margin: 0;
+	list-style: none;
+}
+
+.nav-link {
+	width: 54px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	display: block;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .12);
+	font-size: 14px;
+	color: gray;
+}
+
+.nav-other-link:hover {
+	color: darkblue;
+}
+
+.nav-mainpage a {
+	color: black;
+}
+
+.index-user {
+	float: right;
+	position: relative;
+	min-width: 120px;
+	margin-left: 15px;
+}
+
+.user-info {
+	position: relative;
+	height: 45px;
+	line-height: 45px;
+	text-indent: 46px;
+	color: #888;
+	text-decoration: none;
+	border-top: 0;
+	background: transparent;
+	box-shadow: none;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.index-user a {
+	display: block;
+	width: 120px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .12);
+	font-size: 14px;
+}
+
+.user-portrait {
+	position: absolute;
+	top: 9px;
+	left: 10px;
+	border: 1px solid rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
+	background-color: transparent;
+	height: 25px;
+	width: 25px;
+	border-radius: 3px;
+}
+
+.nav-dropdown {
+	display: none;
+	margin: 0;
+	position: absolute;
+	left: 0;
+}
+
+.nav-dropdown li {
+	margin: 0;
+	list-style: none;
+}
+
+.nav-dropdown a {
+	width: 120px;
+}
+
+.menu ul {
+	padding: 0;
+	margin: 0;
+	/*ul和ol、li都有list-style-type属性，*/
+	list-style-type: none;
+}
+
+.menu ul li {
+	/*float属性定义元素在哪个方向浮动，浮动元素会生成一个块级框。如果浮动非替换元素，则要
+    指明一个明确的宽度，否则会被尽可能的压缩。*/
+	position: relative;
+	list-style-type: none;
+}
+
+.menu ul li a,
+.menu ul li a:visited {
+	/*display的值，none表示不被显示；block表示显示为块级元素，元素前后
+        有换行符；inline为默认值，内联元素，前后没有换行符……*/
+	display: block;
+	text-decoration: none;
+	width: 120px;
+	height: 45px;
+	line-height: 45px;
+}
+
+
+/*鼠标无动作时不显示*/
+
+.menu ul li ul {
+	display: none;
+	box-shadow: 0px 2px 2px rgba(26, 26, 26, .1);
+}
+
+
+/*当鼠标指向第一级li时，第二级ul的动作*/
+
+.menu ul li:hover ul {
+	display: block;
+	position: absolute;
+	top: 45px;
+	left: 0;
+	width: 120px;
+}
+
+.menu ul li:hover ul li a {
+	display: block;
+	background: white;
+	color: gray;
+}
+
+.menu ul li:hover ul li a:hover {
+	background-color: #F6F6F6;
+}
+
+
+/*clear属性定义了元素的哪边上不允许出现浮动元素。*/
+
+.clear {
+	clear: both;
+}
+
+.sec-nav a {
+	float: left;
+	margin-right: 4px;
+}
+
+.nav-icon {
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin: 11px 11px 0 15px;
+	vertical-align: -7px;
+}
+
+.nav-home {
+	background-image: url(../images/个人.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.nav-mess {
+	background-image: url(../images/私信.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.nav-set {
+	background-image: url(../images/设置.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.nav-out {
+	background-image: url(../images/退出.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.bottom-radius {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.index-question {
+	float: right;
+	width: 66px;
+	height: 32px;
+	line-height: 30px;
+	margin-top: 7px;
+	border: 1px solid #00B091;
+	border-radius: 4px;
+	background: #0084ff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05), inset 0 1px 1px rgba(255, 255, 255, .15);
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .12);
+	outline: 0;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+}
+
+.index-content {
+	width: 960px;
+	height: auto;
+	margin: 70px auto;
+	background-color: white;
+	padding: 20px 15px 20px 15px;
+	box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+.content-headline {
+	width: 100%;
+	height: 23px;
+	color: #666;
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.dynamic-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/日历.png);
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.head-set {
+	font-weight: 400;
+	font-size: 13px;
+	float: right;
+}
+
+.word-color {
+	color: #999;
+}
+
+.word-color:hover {
+	color: #0084ff;
+	text-decoration: underline;
+}
+
+.set-icon {
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/set.png);
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.content-list {
+	position: relative;
+	border-top: 1px solid #CCCCCC;
+}
+
+.list-item {
+	padding: 10px 0;
+	position: relative;
+	outline: 0;
+	margin-left: 0;
+}
+
+.item-portrait {
+	float: left;
+	margin: 3px 0 0;
+}
+
+.item-portrait,
+.item-portrait a,
+.item-portrait img {
+	width: 38px;
+	height: 38px;
+	display: block;
+}
+
+.item-portrait img {
+	border-radius: 3px;
+}
+
+.item-main {
+	margin-left: 48px;
+}
+
+.item-source {
+	color: #999999;
+}
+
+.item-content h2 {
+	margin-right: 20px;
+}
+
+a {
+	color: #333333;
+}
+
+.item-content .item-title:hover {
+	color: #0084ff;
+	text-decoration: underline;
+}
+
+.item-body {
+	position: relative;
+	margin-top: 3px;
+}
+
+.body-like {
+	display: block;
+	margin-top: -1px;
+	position: absolute;
+	left: -48px;
+}
+
+.body-like-count {
+	display: block;
+	color: #0084ff;
+	height: 24px;
+	line-height: 24px;
+	width: 38px;
+	border-radius: 3px;
+	border: 0;
+	cursor: pointer;
+	background: #e5f2ff;
+	font-weight: 700;
+	font-weight: 500;
+	text-align: center;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+.body-like-count:hover {
+	background: rgb(217,237,255);
+
+}
+
+.author-info a {
+	font-weight: 700;
+}
+
+.author-info a:hover {
+	color: #0084ff;
+	text-decoration: underline;
+}
+
+a.toggle-expand,
+.CardAdFeed-button {
+	display: inline-block;
+	padding: 0 3px;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #0084ff;
+}
+
+.summary {
+	-webkit-tap-highlight-color: rgba(225, 225, 225, .5);
+	text-overflow: ellipsis;
+	width: 100%;
+	height: auto;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.meta {
+	color: #999999;
+	margin-bottom: 0;
+}
+
+.meta-panel {
+	padding: 5px 0;
+	margin-bottom: -5px;
+	color: #999;
+}
+
+.meta-item:first-child {
+	margin-left: 0;
+}
+
+.meta-panel>a {
+	vertical-align: middle;
+}
+
+.follow {
+	background-image: url(../images/加号.png);
+	background-repeat: no-repeat;
+}
+
+.follow-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+.follow:hover {
+	color: #0084ff;
+	background-image: url(../images/加号hover.png);
+	text-decoration: underline;
+}
+
+.comment {
+	background-image: url(../images/聊天-未选中.png);
+	background-repeat: no-repeat;
+}
+
+.comment-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+.comment:hover {
+	color: #0084ff;
+	background-image: url(../images/聊天-选中1.png);
+	text-decoration: underline;
+}
+
+.meta-item {
+	margin-left: 7px;
+}
+
+.list-item .ignore {
+	position: absolute;
+	right: 3px;
+	top: 17px;
+	display: inline-block;
+	text-indent: -9999px;
+	width: 12px;
+	height: 12px;
+	background-image: url(../images/叉.png);
+	background-repeat: no-repeat;
+}
+
+.list-item .ignore:hover {
+	background-image: url(../images/叉hover.png);
+}
+
+.item-source .category {
+	color: #999999;
+}
+
+.category:hover {
+	color: #0084ff;
+	text-decoration: underline;
+}
+
+.follow-topic {
+	color: #0084ff;
+	font-size: 12px;
+	padding: 2px;
+}
+
+.follow-topic:hover {
+	color: white;
+	background: #0084ff;
+	border-radius: 3px;
+}
+
+.thank {
+	background-image: url(../images/爱心.png);
+	background-repeat: no-repeat;
+}
+
+.thank-icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+.thank:hover {
+	color: #0084ff;
+	background-image: url(../images/爱心hover.png);
+	text-decoration: underline;
+}
+
+.meta-panel>a,
+.meta-panel>span {
+	color: #999;
+	vertical-align: middle;
+}
+
+.bull {
+	padding: 0 3px;
+	font-family: Arial;
+}
+
+.bull+.meta-item {
+	margin-left: 0;
+}
+
+.copyright:hover {
+	color: #0084ff;
+	text-decoration: underline;
+}
+
+.index-footer {
+	margin: 0 auto 100px;
+	width: 960px;
+	height: 20px;
+	background-color: black;
+}
+
+.button-more {
+	width: 100%;
+	display: block;
+	font-size: 13px;
+	margin: 20px 0;
+	padding: 5px 1px;
+	text-align: center;
+	line-height: 1.7;
+	text-decoration: none!important;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	background: dodgerblue;
+	color: white;
+}
+
+.button-more:hover {
+	background: #0084ff;
+}

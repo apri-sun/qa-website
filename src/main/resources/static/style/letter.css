@@ -1,0 +1,132 @@
+a {
+	color: #0084ff;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.reply {
+	margin: 80px auto;
+}
+
+.relpy-content {
+	min-height: 745px;
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
+	clear: both;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(26,26,26,.1);
+	padding: 20px 15px 0 15px;
+}
+
+.letter-list {
+	margin: -10px -20px 0;
+}
+
+.letter-list li {
+	border-bottom: 1px solid #E0E0E0;
+	padding: 20px 10px;
+	overflow: hidden;
+	margin: 0 10px;
+	position: relative;
+}
+
+.letter-link {
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.letter-info {
+	float: right;
+	text-align: right;
+	color: #999;
+	font-size: 12px;
+}
+
+.reply-time {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	white-space: nowrap;
+	font-size: 12px;
+}
+
+.delete-dialogue {
+	white-space: nowrap;
+	position: absolute;
+	right: 10px;
+	bottom: 20px;
+	font-size: 12px;
+}
+
+.reply-box {
+	position: relative;
+	float: left;
+}
+
+.info-count {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #0084ff;
+	color: #FFF;
+	border-radius: 50px;
+	line-height: 16px;
+	outline: medium none;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.user-avatar {
+	display: block;
+	float: left;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border: 1px solid #ededed;
+	border-radius: 50px;
+}
+
+.letter-detail {
+	float: left;
+	font-size: 14px;
+	line-height: 1em;
+	width: 320px;
+}
+
+.letter-name {
+	position: absolute;
+	left: 80px;
+	top: 20px;
+	color: #CCC;
+	display: inline-block;
+}
+.letter-synopsis{
+	position: absolute;
+    left: 80px;
+    top: 50px;
+    color: #666;
+    float: left;
+    font-size: 14px;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+}
+.relpy-content ul li:last-child{
+	border-bottom: 0;
+}
+.letter-synopsis a:hover{
+	text-decoration: underline;
+}
+.delete-dialogue a:hover{
+	text-decoration: underline;
+}

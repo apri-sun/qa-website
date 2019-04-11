@@ -21,7 +21,8 @@ public class LoginController
     private IUserService userService;
 
     @RequestMapping("/reg")
-    public String register(Model model, HttpServletResponse resp, String username, String password,
+    public String register(Model model, HttpServletResponse resp,
+                           @RequestParam("account") String username, String password,
                            @RequestParam(required = false) String next)
     {
         Map<String, String> map = userService.register(username, password);
@@ -37,7 +38,8 @@ public class LoginController
     }
 
     @RequestMapping("/login")
-    public String login(Model model, HttpServletResponse resp, String username, String password,
+    public String login(Model model, HttpServletResponse resp,
+                        @RequestParam("account") String username, String password,
                         @RequestParam(value = "remember_me", defaultValue = "false") boolean rememberMe,
                         @RequestParam(required = false) String next)
     {

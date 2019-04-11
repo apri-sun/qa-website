@@ -1,0 +1,109 @@
+body{
+	margin: 0px;
+	background-color: #f6f6f6;
+}
+
+.main{
+	height: 100%;
+}
+
+#logo{
+	width: 80px;
+	height: 80px;
+	border-radius: 5px;
+}
+
+h3{
+	font-weight: 400;
+}
+
+.main-body{
+	padding-top: 120px;
+	margin: 0 auto;
+	text-align: center;
+	width: 300px;
+}
+
+.main-body-input{
+	border: 1px solid #d5d5d5;
+	border-radius: 3px;
+}
+
+.main-body-input .username{
+	position: relative;
+}
+
+.main-body-input .username .error{
+	position: absolute;
+	top: 10px;
+	right: -60px;
+	background-color: #fff;
+	color: #CC3333;
+	opacity: 0;
+}
+
+.main-body-foot{
+	height: 30px;
+	margin-top: 15px;
+}
+
+.cut-off{
+	position: relative;
+	border-top: 1px solid #e8e8e8;
+}
+
+.main-body-input .cut-off .error{
+	position: absolute;
+	top: 10px;
+	right: -60px;
+	background-color: #fff;
+	color: #c33;
+	opacity: 0;
+}
+
+.main-body-button{
+	height: 40px;
+	margin-top: 15px;
+}
+
+.remember{
+	float: left;
+	font-weight: 200;
+}
+
+button{
+	cursor: pointer;
+	border-radius: 3px;
+	border: 0;
+	box-shadow: none;
+	background-color: #0084ff;
+	width: 145px;
+	height: 40px;
+}
+
+.login{
+	float: left;
+}
+
+.register{
+	float: right;
+}
+
+.cant{
+	color: inherit;
+	float: right;
+	text-decoration: none;
+}
+
+.cant:hover{
+	color: #00BC9B;
+}
+
+[type="text"]{
+	border: 0;
+	padding: 1em .8em;
+	box-sizing: border-box;
+	box-shadow: none;
+	outline: #fff;
+	width: 100%;
+}

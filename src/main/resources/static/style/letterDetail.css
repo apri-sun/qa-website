@@ -1,0 +1,169 @@
+a {
+	color: #0084ff;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.chat {
+	margin: 80px auto;
+}
+
+.chat-content {
+	min-height: 340px;
+	padding: 25px 0 25px;
+	position: relative;
+	z-index: 2;
+	width: 1000px;
+	margin: 0 auto;
+	clear: both;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+.chat-list {
+	padding: 20px;
+}
+
+.chat-list li {
+	margin-bottom: 40px;
+	overflow: hidden;
+	list-style: none;
+}
+
+.chat-list .chat-avatar {
+	margin: 20px 20px 0 0;
+}
+
+.chat-avatar {
+	display: block;
+	float: left;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border: 1px solid #ededed;
+	border-radius: 50px;
+}
+
+
+.dialogbox {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	float: left;
+	display: block;
+	line-height: 1.4;
+	visibility: visible;
+	font-size: 14px;
+}
+.dialogbox-arrow{
+	position: absolute;
+	width:0;
+	height: 0;
+	background-color: #eef2f2;
+	border-width: 10px 10px 10px 0px;
+	border-color: white #eef2f2;
+	border-style: solid;
+	top: 30%;
+	left: -10px;
+}
+.dialogbox-content {
+	background: #eef2f2;
+	width: 820px;
+	max-width: 100%;
+	padding: 20px 25px;
+	text-align: left;
+	color: #666;
+	border-radius: 4px;
+}
+
+.chat-info {
+	width: 120px;
+	float: right;
+	text-align: right;
+	color: #999;
+	font-size: 12px;
+}
+
+.chat-info p {
+	line-height: 2;
+}
+
+.chat-specific {
+	width: 500px;
+	line-height: 1.6;
+	font-size: 14px;
+}
+/*!*/
+.opposite-chat-avatar {
+	margin: 20px 0 0 20px;
+}
+.opposite-chat-avatar {
+	display: block;
+	float: right;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border: 1px solid #ededed;
+	border-radius: 50px;
+}
+
+
+.opposite-dialogbox {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	float: right;
+	display: block;
+	line-height: 1.4;
+	visibility: visible;
+	font-size: 14px;
+}
+.opposite-dialogbox-arrow{
+	position: absolute;
+	width:0;
+	height: 0;
+	background-color: #eef2f2;
+	border-width: 10px 0px 10px 10px;
+	border-color: white #eef2f2;
+	border-style: solid;
+	top: 30%;
+	right: -10px;
+}
+.opposite-dialogbox-content {
+	background: #eef2f2;
+	width: 820px;
+	height: 94px;
+	max-width: 100%;
+	padding: 20px 25px;
+	text-align: left;
+	color: #666;
+	border-radius: 4px;
+}
+
+.opposite-chat-info {
+	width: 120px;
+	float: left;
+	color: #999;
+	font-size: 12px;
+}
+
+.opposite-chat-info p {
+	line-height: 2;
+}
+
+.opposite-chat-specific {
+	width: 500px;
+	text-align: left;
+	float: right;
+	line-height: 1.6;
+	font-size: 14px;
+}
+.dialogbox a:hover{
+	text-decoration: underline;
+}
+.opposite-dialogbox a:hover{
+	text-decoration: underline;
+}
