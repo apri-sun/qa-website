@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>现在的微博里僵尸和水军泛滥</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../static/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="../static/style/navmodel.css" />
+		<link rel="stylesheet" type="text/css" href="../static/style/footermodel.css" />
+		<link rel="stylesheet" type="text/css" href="../static/style/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../static/style/BS.css" />
+		<link rel="stylesheet" href="../static/style/detail.css" />
+	</head>
+
+	<body>
+		<!--顶部锚点-->
+		<a id="anchor-top"></a>
+		<!--头-->
+		<div th:replace="header :: head"></div>
+		<div th:replace="header :: askModal"></div>
+		<div th:replace="header :: msgModal"></div>
+		<!--body-->
+		
+		<div class="main-body">
+			<div class="main-container">
+				<div class="main-container-right">
+					<!--<div class="lables">-->
+						<!--<a href="#">新浪微博</a>-->
+						<!--<a href="#">网络营销</a>-->
+						<!--<a href="#">微博粉丝</a>-->
+						<!--<a href="#">僵尸粉</a>-->
+						<!--<a href="#">网络水军</a>-->
+						<!--<label><img src="../static/images/edit.svg" />修改</label>-->
+					<!--</div>-->
+					<div class="main-question">
+						<h2 th:utext="${question.title}">现在的微博里僵尸和水军泛滥,请问这些网络水军是怎么来的啊?</h2>
+						<!--<label><img src="../static/images/edit.svg" />修改</label>-->
+					</div>
+					<div class="minor-question">
+						<span th:utext="${question.content}">有没有人能系统的讲一下网络水军的发展史?</span>
+						<!--<label><img src="../static/images/edit.svg" />修改</label>-->
+					</div>
+					<div class="watch-list">
+						<div class="setAndfocus">
+							<button>关注问题</button>
+							<span class="setting">
+								<img  id="set" src="../static/images/setting.svg" />
+							</span>
+							<!--隐藏的菜单-->
+							<div class="list">
+								<div id="anonymity">使用匿名身份</div>
+								<div id="redirect">问题重定向</div>
+							</div>
+						</div>
+						<div class="focuserList">
+							<div class="focusNumber">
+								<a href="#" th:text="${followerCount}">9</a>
+								人关注该问题
+							</div>
+							<div class="listPicture">
+								<a href="#" th:each="fan : ${followers}" th:href="@{/user/{userId}(userId=${fan.id})}">
+									<img src="../static/images/da8e974dc_is.jpg" th:src="${fan.headUrl}"/>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="main-text" th:each="vo : ${vos}">
+						<div class="main-text-head">
+							<div class="author-info">
+								<a href="#" th:href="@{/user/{userId}(userId = ${vo.get('user').id})}"
+								   th:utext="${vo.get('user').username}">营销岛</a>
+								<a href="#" id="author-picture"><img th:src="${vo.get('user').headUrl}" src="../static/images/da8e974dc_is.jpg"/></a>
+							</div>
+							<div class="like-number">
+								<a href="#">
+									<span th:text="${vo.get('likeCount')}">28</span>&nbsp;人赞同
+								</a>
+							</div>
+							<div class="like-button">
+								<button class="up" th:classappend="${vo.get('likeStatus') > 0 ? 'pressed' : ''}">
+									&#9650
+									<div th:text="${vo.get('likeCount')}" >28</div>
+								</button>
+								<input type="hidden" th:value="${vo.get('comment').id}"/>
+								<button class="down" th:classappend="${vo.get('likeStatus') < 0 ? 'pressed' : ''}">
+									&#9660
+								</button>
+							</div>
+						</div>
+						<div class="main-text-body">
+							<pre class="main-text-body-container" th:utext="${vo.get('comment').content}">
+								<p>谢邀！</p>
+								<p>网络水军的兴衰起伏，与互联网的进化相互交织。他们是社交时代的镜子，折射的不仅是屏幕上的瞬息万变
+									，还有公众意识与舆论的更替变迁。从论坛时代到微博时代，再到微信时代，水军一直处于舆论的风口浪尖，
+									但他们自称舆论的“弄潮儿”。从人声鼎沸到繁华落尽，如今，水军进入蛰伏期，静待属于他们的春天再次来临。
+								</p>
+							</pre>
+							<div class="main-text-body-foot">
+								<a href="#" th:utext="'发布于 ' + ${#dates.format(vo.get('comment').createdDate, 'yyyy-MM-dd HH:mm:ss')}">发布于 2015-10-8</a>
+								<!--<a href="#" class="ddd"><img src="../static/images/消息.svg" /><span>4</span>条评论</a>-->
+								<!--<a href="#" class="ddd"><img src="../static/images/heart.svg" />感谢</a>	-->
+								<!--隐藏的收起文章-->
+								<div class="pack-up">
+									<button>收起</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--富文本编辑器区域-->
+					<div class="editer-area">
+						<div class="editer-area-container">
+							<div class="editer-area-head">
+								<a href="#">胡源</a>
+								<label><img src="../static/images/edit.svg" />填写话题经验提升话题可信度</label>
+								<a href="#"><img src="../static/images/da8e974dc_is.jpg" /></a>
+							</div>
+							<div class="editer">
+								<div class="editer-head">
+									<div id="bold">
+										<img src="../static/images/bold1.svg" />
+									</div>
+									<div id="italic">
+										<img src="../static/images/italic1.svg" />
+									</div>
+									<div id="underline">
+										<img src="../static/images/underline1.svg" />
+									</div>
+								</div>
+								<iframe id="editer-body">
+									
+								</iframe>
+							</div>
+							<div class="editer-area-foot">
+								<span style="width:65px;border-right: 1px solid #ccc;margin-right: 15px;">
+									<input type="checkbox" />匿名
+								</span>
+								<span>
+									<input type="checkbox" />未经许可,禁止转载
+									<img src="../static/images/question-circle-fill.svg" />
+								</span>
+								<span>
+									<button>发布回答</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../static/script/jquery-3.3.1.min.js" ></script>
+<script src="../static/script/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="#" th:src="@{/script/index.js}" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(function(){
+		
+		//关注问题点击事件
+		$(".watch-list div button").click(function(){
+			if($(".watch-list div button").css("color") == "rgb(255, 255, 255)"){
+				$(".watch-list div button").css({
+					"background":"linear-gradient(to bottom,#f8f8f9,#e6e6e8)",
+					"color":"#666",
+				}).text("取消关注");
+			}else{
+				$(".watch-list div button").css({
+					"background":"",
+					"color":"#fff",
+				}).text("关注问题");
+			}
+		});
+		
+		//关注问题中的设置的点击事件
+		$(document).click(function(e){
+			if($(e.target).attr("id") == "set" && $(".watch-list .setAndfocus .list").css("display") == "none"){
+				$(".watch-list .setAndfocus .list").css("display","inline");
+				return false;
+			}if($(e.target).attr("id") == "set" && $(".watch-list .setAndfocus .list").css("display") != "none"){
+				$(".watch-list .setAndfocus .list").css("display","none");
+				return false;
+			}
+			if($(e.target).attr("id") != "set" && $(".watch-list .setAndfocus .list").css("display") != "none"){
+				$(".watch-list .setAndfocus .list").css("display","none");
+				return false;
+			}
+		});
+		
+		//富文本编辑器
+		var body = document.getElementById("editer-body").contentWindow;//获取iframe 的window对象
+		var doc = document.getElementById("editer-body").contentDocument;//获取iframe 的document对象
+		var $doc =$(doc);
+		
+		body.document.contentEditable = true; //设置元素可编辑
+		body.document.designMode = "on"; //打开设计模式
+		
+		//计数器
+		var boldc = 0;
+		var italicc = 0;
+		var underlinec = 0;
+		
+		//判断点击的是哪个图标
+		$(".editer-head div").click(function(){
+			var kind = $(this).attr("id");
+			if(kind == "bold"){
+				boldc++;
+				body.document.execCommand("bold",false,null);
+				if(boldc%2 == 1){
+					$(this).css({
+						"border":"1px solid #C1C1C1",
+						"background-color":"#ebebeb",
+						"box-shaow":"0 0 3px rgba(0,0,0,.1) inset",
+					});
+				}else{
+					$(this).css({
+						"border":"1px solid transparent",
+						"background":"#f1f1f1",
+						"box-shaow":"none",
+					});
+				}
+			}if(kind == "italic"){
+				italicc++;
+				body.document.execCommand("italic",false,null);
+				if(italicc%2 == 1){
+					$(this).css({
+						"border":"1px solid #C1C1C1",
+						"background-color":"#ebebeb",
+						"box-shaow":"0 0 3px rgba(0,0,0,.1) inset",
+					});
+				}else{
+					$(this).css({
+						"border":"1px solid transparent",
+						"background":"#f1f1f1",
+						"box-shaow":"none",
+					});
+				}
+			}if(kind == "underline"){
+				underlinec++;
+				body.document.execCommand("underline",false,null);
+				if(underlinec%2 == 1){
+					$(this).css({
+						"border":"1px solid #C1C1C1",
+						"background-color":"#ebebeb",
+						"box-shaow":"0 0 3px rgba(0,0,0,.1) inset",
+					});
+				}else{
+					$(this).css({
+						"border":"1px solid transparent",
+						"background":"#f1f1f1",
+						"box-shaow":"none",
+					});
+				}
+			}
+		});
+		
+		//修改富文本编辑区域底部的问号
+		$(".editer-area-foot span img").mouseenter(function(){
+			$(".editer-area-foot span img").attr("src","../static/images/question-circle-fill1.svg");
+		});
+		$(".editer-area-foot span img").mouseout(function(){
+			$(".editer-area-foot span img").attr("src","../static/images/question-circle-fill.svg");
+		});
+		
+		//发布问题按钮绑定事件
+		$(".editer-area-foot span button").click(function(){
+			var text = doc.body.innerHTML;
+			console.log(text)
+		});
+		
+		//侧边点赞栏设置
+//		$(window).scroll(function(){ //窗口滚动监听
+//			if($(window).scrollTop()>310){
+//				$(".like-button-hide").css({
+//					"display":"block",
+//				});
+//			}if($(window).scrollTop()<310){
+//				$(".like-button-hide").css({
+//					"display":"none",
+//				});
+//			}
+//		});
+		
+		//收起按钮设置
+		var no = $(".main-container").height()-$(".editer-area").height()-$(window).height();
+		$(".pack-up").css({
+			"position":"fixed",
+		}).animate({
+			bottom:'10px',
+		});
+		$(window).scroll(function(){
+			if($(window).scrollTop() > no){
+				$(".pack-up").hide();
+			}if($(window).scrollTop() < no){
+				$(".pack-up").show();
+			}
+		});
+		
+//		var ym = $(window).height();
+//		var ar = ym-$(".index-user").height()-$(".pack-up button").height();
+//		$(".pack-up button").css("top",ym).animate({
+//			top:ar,
+//		});
+//		var no = $(".main-container").height()-$(".editer-area").height()-$(window).height();
+//		$(window).scroll(function(){
+//			if($(window).scrollTop()>no && $(".main-text-body-container").css("display") != "none"){
+//				$(".pack-up button").css({
+//					"display":"none",
+//				});
+//			}if($(window).scrollTop()<no && $(".main-text-body-container").css("display") != "none"){
+//				$(".pack-up button").css({
+//					"display":"block",
+//				});
+//			}if($(window).scrollTop()<no && $(".main-text-body-container").css("display") == "none"){
+//				$(".pack-up button").text("展开");
+//			}
+//		});
+//		$(".pack-up button").click(function(){
+//			if($(".pack-up button").text() == "收起"){
+//				$(".main-text-body-container").hide();
+//				$(".pack-up button").text("展开");
+//				return false;
+//			}
+//			if($(".pack-up button").text() == "展开"){
+//				$(".main-text-body-container").show();
+//				$(".pack-up button").text("收起");
+//				return false;
+//			}
+//		});
+		
+		//返回顶部按钮
+		$(window).scroll(function(){
+			if($(window).scrollTop()>$(window).height()){
+				$(".to-top").css("display","block");
+			}if($(window).scrollTop()<$(window).height()){
+				$(".to-top").css("display","none");
+			}
+		});
+		$(".to-top button").click(function(){
+			$("html").animate({scrollTop:$("#anchor-top").offset().top},300); //实现点击后滚动到锚点anchor-top的功能
+		});
+		
+	});
+</script>
+
+<!--回到顶部按钮-->
+<div class="to-top">
+	<button><img src="../static/images/up.svg" /></button>
+</div>

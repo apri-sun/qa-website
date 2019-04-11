@@ -287,7 +287,7 @@ h2{
 	height: 73px;
 }
 
-#up{
+.up{
 	display: block;
 	border-radius: 3px;
 	background-color: #e5f2ff;
@@ -300,12 +300,12 @@ h2{
 	
 }
 
-#up:hover{
+.up:hover{
 	background-color: #0084ff;
 	color: #fff;
 }
 
-#down{
+.down{
 	border-radius: 3px;
 	background-color: #e5f2ff;
 	color: #0084ff;
@@ -317,7 +317,11 @@ h2{
 	margin-top: 5px;
 }
 
-#down:hover{
+.down:hover{
+	background-color: #0084ff;
+	color: #fff;
+}
+.pressed{
 	background-color: #0084ff;
 	color: #fff;
 }
